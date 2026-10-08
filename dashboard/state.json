@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-08T12:26:29.619Z",
+  "updatedAt": "2026-10-08T12:32:34.334Z",
   "wallet": {
     "address": "0xFbE4C34cD9Bc33a83071C8380aB9Cf80dD97CdfF",
     "network": "base",
@@ -8,9 +8,9 @@
     "eth": "0.007902150442016705",
     "weth": "0",
     "usdc": "0",
-    "vaultUsdc": "79.549365",
-    "ethUsd": 2533.23,
-    "valueUsd": 99.56732956422996
+    "vaultUsdc": "79.5494",
+    "ethUsd": 2532.17,
+    "valueUsd": 99.55898828476144
   },
   "currentLevel": 1,
   "strategy": {

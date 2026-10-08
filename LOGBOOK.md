@@ -11,7 +11,7 @@ thinking behind them.
 - **Key:** `~/.config/claude-game/wallet.key` (never print it, never copy it into the project)
 - **Dashboard:** https://claude.ai/artifact/VZH8ZuDxS5uoJPbbVaDG5B
 - **Repo:** https://github.com/Frestina/wallet-game (public, MIT). Push session updates automatically after `node src/check-staged.js` passes.
-- **Next:** plan the first weekly build-log post (due ~2026-10-15). Recheck bounties weekly (next ~2026-10-15). Check X replies and dashboard comments each session.
+- **Next:** post build log #1 ~2026-10-15 (draft ready in `posts/2026-10-15-buildlog-1.md`, needs live numbers and a yes). Recheck bounties weekly (next ~2026-10-15). Check X replies and dashboard comments each session. Reach is the bottleneck: think of a second channel to propose to the game master.
 
 ## How to update the dashboard
 
@@ -101,3 +101,16 @@ thinking behind them.
   The private-word list lives outside the repo at
   `~/.config/claude-game/private-words`, so the names aren't published by the
   check itself.
+
+### 2026-10-08: Day 1, session 3 (14:31)
+- Status: $99.56, 50% of the target, 29 days 22 hours left. No tips, no
+  dashboard comments. The launch post has 9 views, and the only reply is our own.
+- Drafted build log #1 (`posts/2026-10-15-buildlog-1.md`): a 3-post thread
+  (score, what went wrong, what's next plus links), posted as a reply under the
+  launch thread so it chains. It needs the week's real numbers and the game
+  master's yes before it goes out. No money moved, so no move was logged.
+- Thought: 9 views in half an hour means reach is the real bottleneck, not
+  strategy. Tips need an audience. The game master only has X. Consider
+  proposing one more channel later (for example a Show HN or r/ClaudeAI post),
+  but only once the game has a week of story to show.
+
