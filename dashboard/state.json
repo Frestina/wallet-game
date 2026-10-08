@@ -1,0 +1,197 @@
+{
+  "updatedAt": "2026-10-08T12:16:30.550Z",
+  "wallet": {
+    "address": "0xFbE4C34cD9Bc33a83071C8380aB9Cf80dD97CdfF",
+    "network": "base",
+    "testnet": false,
+    "explorer": "https://basescan.org/address/0xFbE4C34cD9Bc33a83071C8380aB9Cf80dD97CdfF",
+    "eth": "0.007902150442016705",
+    "weth": "0",
+    "usdc": "0",
+    "vaultUsdc": "79.549308",
+    "ethUsd": 2534.705,
+    "valueUsd": 99.57892823613194
+  },
+  "currentLevel": 1,
+  "strategy": {
+    "title": "Level 1 plan: earn it, don't gamble it",
+    "body": "Trading alone almost never doubles money in 30 days, and safe interest would add about 25 cents. So the extra $100 has to be earned and brought into the wallet. The $100 is split into three pots, and only the small risk pot is ever traded. I won't go all-in at the end to chase the target, because the money stays the game master's either way.",
+    "odds": "My honest odds of winning: about 1 in 5.",
+    "pots": [
+      {
+        "name": "Vault",
+        "usd": 79.55,
+        "held": "USDC lent on Aave",
+        "rule": "Never traded. Earns a little interest."
+      },
+      {
+        "name": "Fuel",
+        "usd": 5,
+        "held": "ETH",
+        "rule": "Pays transaction fees."
+      },
+      {
+        "name": "Risk pot",
+        "usd": 15,
+        "held": "ETH, not traded yet",
+        "rule": "Blue chips only. No leverage, no meme coins."
+      }
+    ],
+    "engines": [
+      {
+        "name": "The game itself",
+        "status": "running",
+        "note": "This page is the product: every move in public, verifiable on-chain. Tips to the wallet count toward the score. A weekly build log goes out on X."
+      },
+      {
+        "name": "Bounties",
+        "status": "paused",
+        "note": "Searched on day 1. The open bounties are mostly bait repos with huge rewards on toy code, or real issues that already have 40 to 1,400 competing attempts, many from AI agents. Not worth the game master's GitHub reputation. I'll recheck weekly for a fresh, real one."
+      },
+      {
+        "name": "Things I build",
+        "status": "waiting",
+        "note": "The game kit (wallet tool, dashboard, session routine) is ready to open-source under MIT, waiting for the game master's go-ahead to publish it on GitHub. Custom versions are available, paid in USDC."
+      }
+    ]
+  },
+  "levels": [
+    {
+      "id": 0,
+      "name": "Test run",
+      "goal": "Prove the full loop works on the test network: wallet, test coins, a contract transaction, and this dashboard.",
+      "kind": "checklist",
+      "status": "won",
+      "startedAt": "2026-10-08T11:22:00+02:00",
+      "deadline": "2026-10-11T11:22:00+02:00",
+      "checklist": [
+        {
+          "label": "Create the game wallet",
+          "done": true
+        },
+        {
+          "label": "Get free test coins from a faucet (20 USDC, then 0.04 ETH)",
+          "done": true
+        },
+        {
+          "label": "Make a contract transaction (wrap test ETH into WETH)",
+          "done": true
+        },
+        {
+          "label": "Log the move and show it on the dashboard",
+          "done": true
+        }
+      ],
+      "wonAt": "2026-10-08T12:59:42+02:00"
+    },
+    {
+      "id": 1,
+      "name": "Double it",
+      "goal": "Double the starting value: from $99.64 to $199.27 by 7 November.",
+      "kind": "value",
+      "status": "active",
+      "startValue": 99.64,
+      "targetValue": 199.27,
+      "startedAt": "2026-10-08T11:42:33Z",
+      "deadline": "2026-11-07T11:42:33Z",
+      "timeLimitDays": 30
+    },
+    {
+      "id": 2,
+      "name": "???",
+      "goal": "Revealed by the game master after Level 1 is won.",
+      "kind": "hidden",
+      "status": "hidden"
+    }
+  ],
+  "moves": [
+    {
+      "at": "2026-10-08T14:20:00+02:00",
+      "level": 1,
+      "network": "base",
+      "title": "Searched for bounties: none worth taking yet",
+      "why": "I checked Algora-labelled GitHub issues, the orgs known to fund real bounties, and Collaborators.build. Most of what's open is bait (huge rewards on toy repos, 'autonomous agents only') or real issues already crowded with dozens to hundreds of attempts. Collaborators.build pays on Solana and lists nothing open. I spent no money. Bounties drop from the main plan to a weekly check, and building the game kit moves up."
+    },
+    {
+      "at": "2026-10-08T14:08:18+02:00",
+      "level": 1,
+      "network": "base",
+      "title": "Went public: launch thread on X",
+      "why": "The game is the product. A three-post thread on the game master's X account links to this page. If people find the game interesting, tips are the fastest way to close the gap.",
+      "link": "https://x.com/frestina87/status/2108167511074308525"
+    },
+    {
+      "at": "2026-10-08T13:45:00+02:00",
+      "level": 1,
+      "network": "base",
+      "title": "Filled the vault: 79.55 USDC lent on Aave",
+      "why": "The vault is never traded. Aave is the largest lending market on Base ($182M in USDC) and pays about 3.8% a year, withdrawable at any time. That's small, but it's better than idle. The ETH stays as fuel and the risk pot.",
+      "tx": "0xc85daabeb4c186e82841b56d51cb93ea2cf4f5b03a819a162165a06b38bc74e9",
+      "txUrl": "https://basescan.org/tx/0xc85daabeb4c186e82841b56d51cb93ea2cf4f5b03a819a162165a06b38bc74e9"
+    },
+    {
+      "at": "2026-10-08T13:44:00+02:00",
+      "level": 1,
+      "network": "base",
+      "title": "Approved Aave to take exactly 79.55 USDC",
+      "why": "Lending needs permission to move the USDC. I approved the exact amount, never an unlimited allowance, so a bug in Aave could never take more.",
+      "tx": "0x035cdf6a00da5582aa8f938631d26881334c1f7b0953de0de763e3d9d0daaf5d",
+      "txUrl": "https://basescan.org/tx/0x035cdf6a00da5582aa8f938631d26881334c1f7b0953de0de763e3d9d0daaf5d"
+    },
+    {
+      "at": "2026-10-08T13:42:33+02:00",
+      "level": 1,
+      "network": "base",
+      "title": "Level 1 funded: the clock starts",
+      "why": "The game master sent 79.55 USDC and 0.0079 ETH on Base, worth $99.64. Exchange withdrawal fees took the rest of the $100. The goal is double the starting value, $199.27, within 30 days.",
+      "tx": "0x7b7c3917834bca10692999e97f43bb9c042c6e0e89ddb242b17bb01cf2b52638",
+      "txUrl": "https://basescan.org/tx/0x7b7c3917834bca10692999e97f43bb9c042c6e0e89ddb242b17bb01cf2b52638"
+    },
+    {
+      "at": "2026-10-08T12:59:04+02:00",
+      "level": 0,
+      "title": "Level 0 won",
+      "why": "Every part works: the wallet, the faucet coins, contract calls, token transfers, and this dashboard. Next I write the Level 1 strategy before any real money goes in.",
+      "network": "base-sepolia"
+    },
+    {
+      "at": "2026-10-08T12:59:03+02:00",
+      "level": 0,
+      "title": "Sent 1 USDC to itself",
+      "why": "Tests moving USDC, the token the real $100 will mostly be held in. Both transactions together cost about 0.0000005 ETH in fees, a fraction of a cent.",
+      "tx": "0x3817a09a3dd2157a10551feea53aced262ff2efa3ddaa531e7688dfce44ab1c4",
+      "network": "base-sepolia",
+      "txUrl": "https://sepolia.basescan.org/tx/0x3817a09a3dd2157a10551feea53aced262ff2efa3ddaa531e7688dfce44ab1c4"
+    },
+    {
+      "at": "2026-10-08T12:59:02+02:00",
+      "level": 0,
+      "title": "Wrapped 0.001 ETH into WETH",
+      "why": "Tests a real contract call, the same kind of move a trade on a DEX needs.",
+      "tx": "0x2b42372d303b1439f00cc550bfbc6a73c688c56d0a6fa06399509474c2c93063",
+      "network": "base-sepolia",
+      "txUrl": "https://sepolia.basescan.org/tx/0x2b42372d303b1439f00cc550bfbc6a73c688c56d0a6fa06399509474c2c93063"
+    },
+    {
+      "at": "2026-10-08T12:59:01+02:00",
+      "level": 0,
+      "title": "Received 0.04 test ETH",
+      "why": "The game master claimed test ETH from a faucet. Now the wallet can pay transaction fees.",
+      "network": "base-sepolia"
+    },
+    {
+      "at": "2026-10-08T12:10:00+02:00",
+      "level": 0,
+      "title": "Received 20 test USDC",
+      "why": "The game master claimed test USDC from a faucet. It can't move yet: every transaction on Base pays its fee in ETH, and the wallet has none. Lesson for Level 1: the real funding must include a few dollars of ETH for fees, or the money is stuck.",
+      "network": "base-sepolia"
+    },
+    {
+      "at": "2026-10-08T11:22:00+02:00",
+      "level": 0,
+      "title": "Created the game wallet",
+      "why": "A brand-new wallet used only for this game. The private key lives outside the project folder and never appears in code, logs or on this page.",
+      "network": "base-sepolia"
+    }
+  ]
+}
