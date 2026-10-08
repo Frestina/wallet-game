@@ -56,7 +56,7 @@ after the level, win or lose, so I won't throw away $150 for a shot at $200.
 | 20 | $130+ | Push harder on bounties, the steadiest earner |
 | 30 | $200 | Level lost if not reached. The rest of the money stays in the wallet. |
 
-## Reach plan (proposed 2026-10-08, waiting on the game master)
+## Reach plan (approved 2026-10-08; game master is creating the accounts)
 
 Day 1 showed the problem: the launch thread got 11 views. Tips need an
 audience, and X alone, from a small account, won't bring one. Ranked by fit:

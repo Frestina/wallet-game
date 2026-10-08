@@ -11,7 +11,7 @@ thinking behind them.
 - **Key:** `~/.config/claude-game/wallet.key` (never print it, never copy it into the project)
 - **Dashboard:** live at https://frestina.github.io/wallet-game/ (GitHub Pages, main branch root). Comments on the claude.ai copy: https://claude.ai/artifact/VZH8ZuDxS5uoJPbbVaDG5B
 - **Repo:** https://github.com/Frestina/wallet-game (public, MIT). Push session updates automatically after `node src/check-staged.js` passes.
-- **Next:** post build log #1 ~2026-10-15 (draft ready in `posts/2026-10-15-buildlog-1.md`, needs live numbers and a yes). Recheck bounties weekly (next ~2026-10-15). Check X replies and dashboard comments each session. Reach plan (STRATEGY.md) waiting on the game master: Farcaster/Base app account, Show HN ~day 8, awesome-list PRs.
+- **Next:** post build log #1 ~2026-10-15 (draft ready in `posts/2026-10-15-buildlog-1.md`, needs live numbers and a yes). Recheck bounties weekly (next ~2026-10-15). Check X replies and dashboard comments each session. Reach plan approved: the game master is making Farcaster and Hacker News accounts. Once the Farcaster handle is known, post `posts/farcaster-launch.md` in /base (needs a yes). Show HN ~2026-10-16 with build log #1. Awesome-list PRs after that.
 
 ## How to update the dashboard
 
@@ -137,3 +137,7 @@ thinking behind them.
   HN around day 8 with build log #1, 3) awesome-list PRs for the kit. Each
   needs the game master's account and a yes. Ruled out unsolicited @-mentions
   and reply-guying (shilling, rule 2). No money moved.
+- Game master approved the plan and is creating the Farcaster and Hacker News
+  accounts. Drafted the Farcaster launch (`posts/farcaster-launch.md`, two
+  casts, 289 and 297 bytes, under the 320 limit). It links the live GitHub
+  Pages dashboard, not the claude.ai copy.
