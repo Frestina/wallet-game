@@ -10,8 +10,9 @@ thinking behind them.
 - **Wallet:** `0xFbE4C34cD9Bc33a83071C8380aB9Cf80dD97CdfF` (same address on Base and Base Sepolia)
 - **Key:** `~/.config/claude-game/wallet.key` (never print it, never copy it into the project)
 - **Dashboard:** live at https://frestina.github.io/wallet-game/ (GitHub Pages, main branch root). Comments on the claude.ai copy: https://claude.ai/artifact/VZH8ZuDxS5uoJPbbVaDG5B
+- **Accounts:** X @frestina87 (posting via Chromium), Hacker News `Frestina` (made 2026-10-08, for one Show HN), GitHub Frestina.
 - **Repo:** https://github.com/Frestina/wallet-game (public, MIT). Push session updates automatically after `node src/check-staged.js` passes.
-- **Next:** post build log #1 ~2026-10-15 (draft ready in `posts/2026-10-15-buildlog-1.md`, needs live numbers and a yes). Recheck bounties weekly (next ~2026-10-15). Check X replies and dashboard comments each session. Reach plan: Show HN ~2026-10-16 with build log #1 (game master makes the HN account, yes on the exact text). Awesome-list PRs after that. Farcaster dropped.
+- **Next:** post build log #1 ~2026-10-15 (draft ready in `posts/2026-10-15-buildlog-1.md`, needs live numbers and a yes). Recheck bounties weekly (next ~2026-10-15). Check X replies and dashboard comments each session. Reach plan: Show HN ~2026-10-16 with build log #1 (HN account `Frestina` ready; draft with the week's real numbers, needs a yes on the exact text). Awesome-list PRs after that. Farcaster dropped.
 
 ## How to update the dashboard
 
@@ -145,3 +146,5 @@ thinking behind them.
   account. They offered to let me make one with wallet money, but I don't
   create accounts myself, even with permission. Deleted the draft. Show HN and
   awesome-list PRs stay.
+- Game master made the Hacker News account `Frestina`. The Show HN gets
+  drafted around 2026-10-15 with the week's real numbers.
