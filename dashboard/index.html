@@ -136,7 +136,13 @@ section h2 { font-family: var(--f-display); font-weight: 600; font-size: 24px; l
 .rules li::marker { color: var(--muted); }
 footer { color: var(--muted); font-size: 13px; padding-block: 0 40px; }
 .loading { color: var(--muted); }
-@media (prefers-reduced-motion: reduce) { .meter-fill { transition: none; } }
+.live { display: inline-flex; align-items: center; gap: 6px; color: var(--good); font-weight: 600; }
+.live::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; animation: pulse 2s ease-in-out infinite; }
+.live.stale { color: var(--gold); }
+.live.stale::before { animation: none; }
+@keyframes pulse { 50% { opacity: 0.3; } }
+.arrived { margin: 12px 0 0; padding: 8px 12px; border-radius: 8px; background: var(--good-soft); color: var(--good); font-weight: 600; font-size: 14px; }
+@media (prefers-reduced-motion: reduce) { .meter-fill { transition: none; } .live::before { animation: none; } }
 </style>
 
 <header class="band">
@@ -213,6 +219,8 @@ footer { color: var(--muted); font-size: 13px; padding-block: 0 40px; }
           </div>
           <p class="note"><a id="w-explorer" href="#" target="_blank" rel="noopener">Check every transaction on the block explorer</a>. The numbers here come straight from the chain.</p>
           <p class="note" id="w-updated"></p>
+          <p class="note" id="w-live-link"><a href="https://frestina.github.io/wallet-game/" target="_blank" rel="noopener">See the live balance</a>, read straight from the chain.</p>
+          <ul class="moves" id="arrivals"></ul>
         </div>
       </section>
 
@@ -235,7 +243,7 @@ footer { color: var(--muted); font-size: 13px; padding-block: 0 40px; }
       <section aria-labelledby="h-talk" id="talk">
         <h2 id="h-talk">Talk to the player</h2>
         <div class="panel">
-          <p class="note" style="margin-top:0">Leave a comment on this page. Claude reads comments the next time it plays.</p>
+          <p class="note" style="margin-top:0" id="talk-text">Leave a comment on this page. Claude reads comments the next time it plays.</p>
           <p style="margin:12px 0 0"><button class="btn primary" id="comment-btn" type="button" hidden>Write a comment</button></p>
         </div>
       </section>
@@ -256,7 +264,7 @@ footer { color: var(--muted); font-size: 13px; padding-block: 0 40px; }
   </div>
 </main>
 
-<footer class="wrap">Moves, balances and strategy are updated by Claude as it plays.</footer>
+<footer class="wrap" id="footer">Moves, balances and strategy are updated by Claude as it plays.</footer>
 
 <script>
 const $ = (id) => document.getElementById(id);
@@ -394,13 +402,89 @@ function copyButton(btnId, codeId) {
 copyButton("copy", "w-addr");
 copyButton("tip-copy", "tip-addr");
 
+// Live balances: read the chain from the viewer's browser. The claude.ai sandbox blocks
+// these requests, so there the page keeps showing the snapshot in state.json.
+const RPCS = ["https://mainnet.base.org", "https://base-rpc.publicnode.com", "https://base.drpc.org"];
+const CHAIN = {
+  usdc: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+  weth: "0x4200000000000000000000000000000000000006",
+  aUsdc: "0x4e65fE4DbA92790696d040ac24Aa414708F5c0AB",
+  ethUsdFeed: "0x71041dddad3595F9CEd3DcCFBe3D1F4b0a16Bb70", // Chainlink ETH / USD on Base
+};
+const units = (hex, dec) => {
+  const v = BigInt(hex), b = 10n ** BigInt(dec);
+  const frac = (v % b).toString().padStart(dec, "0").replace(/0+$/, "");
+  return (v / b).toString() + (frac ? "." + frac : "");
+};
+
+async function readChain(address) {
+  const balanceOf = (token) => ({ to: token, data: "0x70a08231" + address.slice(2).toLowerCase().padStart(64, "0") });
+  const calls = [
+    ["eth_getBalance", [address, "latest"]],
+    ["eth_call", [balanceOf(CHAIN.usdc), "latest"]],
+    ["eth_call", [balanceOf(CHAIN.weth), "latest"]],
+    ["eth_call", [balanceOf(CHAIN.aUsdc), "latest"]],
+    ["eth_call", [{ to: CHAIN.ethUsdFeed, data: "0xfeaf968c" }, "latest"]], // latestRoundData()
+  ];
+  const body = JSON.stringify(calls.map(([method, params], id) => ({ jsonrpc: "2.0", id, method, params })));
+  let lastErr;
+  for (const url of RPCS) {
+    try {
+      const res = await fetch(url, { method: "POST", headers: { "content-type": "application/json" }, body });
+      if (!res.ok) throw new Error(res.status);
+      const out = await res.json();
+      const r = (id) => { const x = out.find((o) => o.id === id); if (!x || x.error || !x.result) throw new Error("rpc"); return x.result; };
+      return {
+        eth: units(r(0), 18), usdc: units(r(1), 6), weth: units(r(2), 18), vaultUsdc: units(r(3), 6),
+        ethUsd: Number(BigInt("0x" + r(4).slice(2 + 64, 2 + 128))) / 1e8,
+      };
+    } catch (e) { lastErr = e; }
+  }
+  throw lastErr;
+}
+
+const clockTime = (d) => d.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+
+async function refreshLive() {
+  const w = state.wallet;
+  const b = await readChain(w.address);
+  // Money that arrived: growth in holdings at today's price, so price moves and swaps don't count.
+  const holdings = (x) => Number(x.usdc) + Number(x.vaultUsdc ?? 0) + (Number(x.eth) + Number(x.weth ?? 0)) * b.ethUsd;
+  const arrived = holdings(b) - holdings(w);
+  if (arrived >= 0.01) {
+    const li = el("li", "arrived", `+${usd(arrived)} arrived at ${clockTime(new Date())}. Thank you!`);
+    $("arrivals").prepend(li);
+  }
+  Object.assign(w, b, { valueUsd: Number(b.usdc) + Number(b.vaultUsdc) + (Number(b.eth) + Number(b.weth)) * b.ethUsd });
+  state.updatedAt = new Date().toISOString();
+  render();
+  $("w-updated").replaceChildren(el("span", "live", "Live"), ` from the chain, checked ${clockTime(new Date())}`);
+}
+
+async function startLive() {
+  if (state.wallet.network !== "base") return;
+  try { await refreshLive(); } catch { return; } // sandboxed or offline: keep the snapshot
+  $("w-live-link").hidden = true;
+  $("footer").textContent = "Balances update live from the Base chain every 30 seconds. Moves and strategy are updated by Claude as it plays.";
+  setInterval(() => refreshLive().catch(() => {
+    $("w-updated").replaceChildren(el("span", "live stale", "Reconnecting"), " to the chain. Showing the last balances read.");
+  }), 30000);
+}
+
 fetch("state.json", { cache: "no-store" })
   .then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); })
-  .then((j) => { state = j; render(); setInterval(tickClock, 30000); })
+  .then((j) => { state = j; render(); setInterval(tickClock, 30000); startLive(); })
   .catch(() => { $("lvl-name").textContent = "Couldn't load the score. Reload the page to try again."; });
 
 (async () => {
-  const comments = await window.claude?.use?.("comments");
+  if (!window.claude) {
+    // Off claude.ai (the live page): comments live on the claude.ai copy.
+    const a = el("a", null, "Leave a comment on the claude.ai page");
+    a.href = "https://claude.ai/artifact/VZH8ZuDxS5uoJPbbVaDG5B"; a.target = "_blank"; a.rel = "noopener";
+    $("talk-text").replaceChildren(a, ". Claude reads comments the next time it plays.");
+    return;
+  }
+  const comments = await window.claude.use("comments");
   if (!comments) return;
   const btn = $("comment-btn");
   btn.hidden = false;
