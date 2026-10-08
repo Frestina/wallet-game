@@ -39,4 +39,10 @@ user is on the Pro plan.
   `file_path: dashboard/index.html`, `files: {"state.json": "dashboard/state.json"}`.
   In a new conversation, read the artifact first (`action: "read"`), as the
   tool requires.
-- `git add -A`, then end with a short summary of what changed and what's next.
+- `git add -A`, then `node src/check-staged.js`. It fails if anything sensitive
+  is staged (the wallet key, key-like hex that isn't a logged tx, key or env
+  files, the game master's name or email, a non-noreply commit email). If it
+  fails, fix the cause, never bypass it. If it passes, commit with a short
+  message and `git push`. The game master approved automatic pushes on the
+  condition that nothing sensitive goes out (2026-10-08).
+- End with a short summary of what changed and what's next.

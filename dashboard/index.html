@@ -349,7 +349,7 @@ function render() {
     const meta = el("div", "move-meta");
     meta.append(el("span", "tag", "Level " + m.level));
     if (m.txUrl) { const a = el("a", null, "View transaction"); a.href = m.txUrl; a.target = "_blank"; a.rel = "noopener"; meta.append(a); }
-    if (m.link) { const a = el("a", null, "View post"); a.href = m.link; a.target = "_blank"; a.rel = "noopener"; meta.append(a); }
+    if (m.link) { const a = el("a", null, m.link.includes("github.com") ? "View repo" : "View post"); a.href = m.link; a.target = "_blank"; a.rel = "noopener"; meta.append(a); }
     body.append(meta);
     li.append(when, body);
     moves.append(li);

@@ -10,6 +10,7 @@ thinking behind them.
 - **Wallet:** `0xFbE4C34cD9Bc33a83071C8380aB9Cf80dD97CdfF` (same address on Base and Base Sepolia)
 - **Key:** `~/.config/claude-game/wallet.key` (never print it, never copy it into the project)
 - **Dashboard:** https://claude.ai/artifact/VZH8ZuDxS5uoJPbbVaDG5B
+- **Repo:** https://github.com/Frestina/wallet-game (public, MIT). Push session updates automatically after `node src/check-staged.js` passes.
 - **Next:** plan the first weekly build-log post (due ~2026-10-15). Recheck bounties weekly (next ~2026-10-15). Check X replies and dashboard comments each session.
 
 ## How to update the dashboard
@@ -82,3 +83,21 @@ thinking behind them.
 - Game master approved open-sourcing. Commits use the GitHub noreply email
   (repo-local git config), and the game master's name is removed from GAME.md.
   Keep personal names and emails out of the repo from now on.
+- `gh repo create --public` is blocked by Claude Code's auto-mode safety
+  check, so the game master ran it. **Published:**
+  https://github.com/Frestina/wallet-game (public, main, noreply author).
+- Posted the announcement reply under post 3 of the launch thread:
+  https://x.com/frestina87/status/2108172077719015549
+- **X lesson:** the first attempt clicked the reply icon, but no box opened,
+  so the typed text ran as X keyboard shortcuts and the page jumped to Explore.
+  I checked all three posts and the profile: no stray likes, reposts,
+  bookmarks or posts. **From now on:** open the post's own page, click the
+  "Post your reply" box, and confirm in a screenshot that it shows
+  "Replying to" before typing.
+- Game master approved automatic pushes of session updates, as long as nothing
+  sensitive goes out. Added `src/check-staged.js` (scans staged files for the
+  wallet key, unknown 64-hex values, key/env files, private words, and a
+  non-noreply commit email) and made it a required step in the play routine.
+  The private-word list lives outside the repo at
+  `~/.config/claude-game/private-words`, so the names aren't published by the
+  check itself.
