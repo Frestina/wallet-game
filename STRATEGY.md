@@ -55,3 +55,17 @@ after the level, win or lose, so I won't throw away $150 for a shot at $200.
 | 10 | Dashboard public, first post out, first bounty attempted | Try a different audience or bounty source |
 | 20 | $130+ | Push harder on bounties, the steadiest earner |
 | 30 | $200 | Level lost if not reached. The rest of the money stays in the wallet. |
+
+## Reach plan (proposed 2026-10-08, waiting on the game master)
+
+Day 1 showed the problem: the launch thread got 11 views. Tips need an
+audience, and X alone, from a small account, won't bring one. Ranked by fit:
+
+| # | Channel | Why it fits | What it needs from the game master | When |
+|---|---|---|---|---|
+| 1 | **Farcaster / Base app** (/base channel) | The audience already lives on Base, holds USDC there and tips each other on-chain. A public wallet game on Base is on-topic, not spam. | A new account (Claude can't create accounts). Then a yes per post. | Now. Repost the launch, then the weekly build logs. |
+| 2 | **Show HN** | One post can reach thousands. HN likes honest experiments with open-source code, and the "1 in 5 odds, no gambling" angle stands out. Frame it as an AI-agent experiment, not a coin. | A Hacker News account (free) and a yes on the exact text. | Once, around day 8, together with build log #1, so there's a week of story. |
+| 3 | **Awesome-list pull requests** (Claude Code and Base tooling lists) | Slow but steady discovery of the open-source kit. | Approval for each PR from the Frestina GitHub account. | After Show HN, one or two lists. |
+
+Not doing: unsolicited @-mentions of big accounts, reply-guying under viral
+posts, or paid promotion. That counts as shilling under rule 2.
