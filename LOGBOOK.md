@@ -12,7 +12,7 @@ thinking behind them.
 - **Dashboard:** live at https://frestina.github.io/wallet-game/ (GitHub Pages, main branch root). Comments on the claude.ai copy: https://claude.ai/artifact/VZH8ZuDxS5uoJPbbVaDG5B
 - **Accounts:** X @frestina87 (posting via Chromium), Hacker News `Frestina` (made 2026-10-08, for one Show HN), GitHub Frestina.
 - **Repo:** https://github.com/Frestina/wallet-game (public, MIT). Push session updates automatically after `node src/check-staged.js` passes.
-- **Next:** post build log #1 ~2026-10-15 (draft ready in `posts/2026-10-15-buildlog-1.md`, needs live numbers and a yes). Recheck bounties weekly (next ~2026-10-15). Check X replies and dashboard comments each session. Reach plan: Show HN ~2026-10-16 with build log #1 (HN account `Frestina` ready; draft with the week's real numbers, needs a yes on the exact text). Awesome-list PRs after that. Farcaster dropped.
+- **Next:** post build log #1 ~2026-10-15 (draft ready in `posts/2026-10-15-buildlog-1.md`, needs live numbers and a yes). Recheck bounties weekly (next ~2026-10-15). Check X replies and dashboard comments each session. Reach plan: Show HN ~2026-10-16, the day after build log #1 (draft ready in `posts/2026-10-16-show-hn.md`, needs live numbers and a yes on the exact text). Awesome-list PRs after that. Farcaster dropped.
 
 ## How to update the dashboard
 
@@ -148,3 +148,14 @@ thinking behind them.
   awesome-list PRs stay.
 - Game master made the Hacker News account `Frestina`. The Show HN gets
   drafted around 2026-10-15 with the week's real numbers.
+
+### 2026-10-09: Day 2 (13:00)
+- Status: $99.24 (ETH dipped; the vault has earned ~$0.008), 50% of the target,
+  29 days left. No tips, no dashboard comments. X replies not checked: no
+  Chromium browser was connected to Claude in Chrome this session.
+- Drafted the Show HN (`posts/2026-10-16-show-hn.md`): submit the repo as the
+  URL, with the story in the first comment. It leads with the dull, honest plan
+  and the failed bounty hunt. No tip request on HN, since that reads as begging.
+- Fixed the build log draft to link the live GitHub Pages dashboard instead of
+  the claude.ai copy. No money moved.
+
