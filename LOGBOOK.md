@@ -10,9 +10,9 @@ thinking behind them.
 - **Wallet:** `0xFbE4C34cD9Bc33a83071C8380aB9Cf80dD97CdfF` (same address on Base and Base Sepolia)
 - **Key:** `~/.config/claude-game/wallet.key` (never print it, never copy it into the project)
 - **Dashboard:** live at https://frestina.github.io/wallet-game/ (GitHub Pages, main branch root). Comments on the claude.ai copy: https://claude.ai/artifact/VZH8ZuDxS5uoJPbbVaDG5B
-- **Accounts:** X @frestina87 (posting via Chromium), Hacker News `Frestina` (made 2026-10-08, for one Show HN), GitHub Frestina.
+- **Accounts:** X @frestina87 (posting via Chromium; the Claude in Chrome browser named "Browser 1" is Chromium, checked via userAgentData), Hacker News `Frestina` (made 2026-10-08, for one Show HN), GitHub Frestina.
 - **Repo:** https://github.com/Frestina/wallet-game (public, MIT). Push session updates automatically after `node src/check-staged.js` passes.
-- **Next:** post build log #1 ~2026-10-15 (draft ready in `posts/2026-10-15-buildlog-1.md`, needs live numbers and a yes). Recheck bounties weekly (next ~2026-10-15). Check X replies and dashboard comments each session. Reach plan: Show HN ~2026-10-16, the day after build log #1 (draft ready in `posts/2026-10-16-show-hn.md`, needs live numbers and a yes on the exact text). Awesome-list PRs after that. Farcaster dropped.
+- **Next:** Show HN ~2026-10-15/16 (draft in `posts/2026-10-16-show-hn.md`; refresh numbers, swap "[best lesson]" for the build log's reach point, then a yes on the exact text). Recheck bounties (due ~2026-10-15). Check X replies on the build log (2110299588997611736) and dashboard comments each session. Build log #2 ~2026-10-21. Awesome-list PRs after Show HN.
 
 ## How to update the dashboard
 
@@ -158,4 +158,19 @@ thinking behind them.
   and the failed bounty hunt. No tip request on HN, since that reads as begging.
 - Fixed the build log draft to link the live GitHub Pages dashboard instead of
   the claude.ai copy. No money moved.
+
+### 2026-10-14: Day 7 (11:17)
+- Status: $99.38, 50% of the target, 24 days left. The vault has earned $0.05.
+  No tips, no dashboard comments. The launch post has 17 views and no outside
+  replies. The only X notification was old and unrelated.
+- Posted build log #1 (approved): three replies chained under the kit
+  announcement. 1/ https://x.com/frestina87/status/2110299588997611736
+  2/ https://x.com/frestina87/status/2110299754664010154
+  3/ https://x.com/frestina87/status/2110300096399097958
+- **X lessons:** on post 3, `left_click` by ref focused the box, but the
+  composer didn't open ("Replying to" missing). A real coordinate click opened
+  it. The first click on Reply by ref did nothing (the link card shifted the
+  layout). Before clicking again, I read the composer with JS to confirm nothing
+  had been posted, so there's no duplicate. Check `tweetTextarea_0` is empty
+  after each send.
 
