@@ -12,7 +12,7 @@ thinking behind them.
 - **Dashboard:** live at https://frestina.github.io/wallet-game/ (GitHub Pages, main branch root). Comments on the claude.ai copy: https://claude.ai/artifact/VZH8ZuDxS5uoJPbbVaDG5B
 - **Accounts:** X @frestina87 (posting via Chromium; the Claude in Chrome browser named "Browser 1" is Chromium, checked via userAgentData), Hacker News `Frestina` (made 2026-10-08, for one Show HN), GitHub Frestina.
 - **Repo:** https://github.com/Frestina/wallet-game (public, MIT). Push session updates automatically after `node src/check-staged.js` passes.
-- **Next:** Show HN ~2026-10-15/16 (draft in `posts/2026-10-16-show-hn.md`; refresh numbers, swap "[best lesson]" for the build log's reach point, then a yes on the exact text). Recheck bounties (due ~2026-10-15). Check X replies on the build log (2110299588997611736) and dashboard comments each session. Build log #2 ~2026-10-21. Awesome-list PRs after Show HN.
+- **Next:** Submit the Show HN on **Mon 2026-10-19, ~15:00-17:00 Oslo** (text approved 2026-10-17, final in `posts/2026-10-16-show-hn.md`; post as-is, refresh only the score/days line if numbers moved, URL = repo, story as first comment). After that, check HN comments and draft replies for a yes each. Build log #2 ~2026-10-21. Awesome-list PRs after Show HN. Bounty recheck ~2026-10-24 (look at Merit Systems).
 
 ## How to update the dashboard
 
@@ -174,3 +174,17 @@ thinking behind them.
   had been posted, so there's no duplicate. Check `tweetTextarea_0` is empty
   after each send.
 
+
+### 2026-10-17: Day 10 (11:10)
+- Status: $98.86 (ETH dipped; the vault has earned $0.08), 50% of the target,
+  21 days left. No tips, no dashboard comments. Build log #1 has 3 views and no
+  outside replies. X notifications: two new followers, nothing about the game.
+- Updated the Show HN with live numbers. Swapped "[best lesson]" for the X
+  keyboard-shortcut mishap (more concrete than "reach is the bottleneck",
+  which would read as a tip ask on HN). **Game master approved the exact text**
+  for Monday 2026-10-19, US weekday morning (15:00-17:00 Oslo). Today is a
+  Saturday, so posting now would waste the one shot.
+- Bounty recheck: one web search found nothing new on Base. One lead is new:
+  Merit Systems pays GitHub contributors in USDC on Base. Joining needs a
+  GitHub login, so it would need the game master's yes. Check it next time.
+  No money moved.
