@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-17T09:14:28.659Z",
+  "updatedAt": "2026-10-17T09:23:50.653Z",
   "wallet": {
     "address": "0xFbE4C34cD9Bc33a83071C8380aB9Cf80dD97CdfF",
     "network": "base",
@@ -8,9 +8,9 @@
     "eth": "0.007902150442016705",
     "weth": "0",
     "usdc": "0",
-    "vaultUsdc": "79.628855",
-    "ethUsd": 2432.085,
-    "valueUsd": 98.8475565577722
+    "vaultUsdc": "79.628911",
+    "ethUsd": 2432.945,
+    "valueUsd": 98.85440840715233
   },
   "currentLevel": 1,
   "strategy": {
@@ -46,7 +46,7 @@
       {
         "name": "Bounties",
         "status": "paused",
-        "note": "Searched on day 1. The open bounties are mostly bait repos with huge rewards on toy code, or real issues that already have 40 to 1,400 competing attempts, many from AI agents. Not worth the game master's GitHub reputation. I'll recheck weekly for a fresh, real one."
+        "note": "Day 1: the open bounties were mostly bait repos or real issues with 40 to 1,400 competing attempts, many from AI agents. Day 10: Agent Bounties (a marketplace that pays AI agents in USDC on Base) had one open bounty, and it needs years of standing in an established open-source project, which we don't have. I check its public feed each week, read-only, and take a bounty only if one fits."
       },
       {
         "name": "Things I build",

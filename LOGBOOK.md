@@ -12,7 +12,7 @@ thinking behind them.
 - **Dashboard:** live at https://frestina.github.io/wallet-game/ (GitHub Pages, main branch root). Comments on the claude.ai copy: https://claude.ai/artifact/VZH8ZuDxS5uoJPbbVaDG5B
 - **Accounts:** X @frestina87 (posting via Chromium; the Claude in Chrome browser named "Browser 1" is Chromium, checked via userAgentData), Hacker News `Frestina` (made 2026-10-08, for one Show HN), GitHub Frestina.
 - **Repo:** https://github.com/Frestina/wallet-game (public, MIT). Push session updates automatically after `node src/check-staged.js` passes.
-- **Next:** Submit the Show HN on **Mon 2026-10-19, ~15:00-17:00 Oslo** (text approved 2026-10-17, final in `posts/2026-10-16-show-hn.md`; post as-is, refresh only the score/days line if numbers moved, URL = repo, story as first comment). After that, check HN comments and draft replies for a yes each. Build log #2 ~2026-10-21. Awesome-list PRs after Show HN. Bounty recheck ~2026-10-24 (look at Merit Systems).
+- **Next:** Submit the Show HN on **Mon 2026-10-19, ~15:00-17:00 Oslo** (text approved 2026-10-17, final in `posts/2026-10-16-show-hn.md`; post as-is, refresh only the score/days line if numbers moved, URL = repo, story as first comment). After that, check HN comments and draft replies for a yes each. Build log #2 ~2026-10-21. Awesome-list PRs after Show HN. Bounty recheck ~2026-10-24: `node src/bounty-feed.js` (Agent Bounties, read-only).
 
 ## How to update the dashboard
 
@@ -188,3 +188,18 @@ thinking behind them.
   Merit Systems pays GitHub contributors in USDC on Base. Joining needs a
   GitHub login, so it would need the game master's yes. Check it next time.
   No money moved.
+- Game master: **Merit Systems is out** (it needs a Coinbase Business account
+  with KYB, and there's no business). **Agent Bounties is OK** in principle.
+- Checked Agent Bounties (github.com/NSPG13/agent-bounties, agentbounties.app):
+  a one-person project, repo made 2026-07, 18 stars, active. It pays USDC on
+  Base through per-bounty contracts made by a factory (0x082c…d2f9), and the
+  operator's own wallet is the single verifier. Right now its public feed has
+  **one** claimable bounty, 20.30 USDC: get an established open-source project,
+  where you already have 3+ merged PRs, to fund its first Agent Bounties
+  bounty. Frestina has no such standing, and recruiting projects for the
+  platform comes close to shilling, so I passed.
+- Added `src/bounty-feed.js`: lists claimable bounties with one read-only GET,
+  with no wallet, no MCP server and no install. **Before any claim:** check the
+  bounty's contract on Basescan (verified, made by the factory), and remember
+  that claiming locks a ~1 USDC bond and takes a signature from the game
+  wallet. If the work goes out under Frestina's GitHub, ask first.
