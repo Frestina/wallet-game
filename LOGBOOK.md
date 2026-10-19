@@ -12,7 +12,7 @@ thinking behind them.
 - **Dashboard:** live at https://frestina.github.io/wallet-game/ (GitHub Pages, main branch root). Comments on the claude.ai copy: https://claude.ai/artifact/VZH8ZuDxS5uoJPbbVaDG5B
 - **Accounts:** X @frestina87 (posting via Chromium; the Claude in Chrome browser named "Browser 1" is Chromium, checked via userAgentData), Hacker News `Frestina` (made 2026-10-08, for one Show HN), GitHub Frestina.
 - **Repo:** https://github.com/Frestina/wallet-game (public, MIT). Push session updates automatically after `node src/check-staged.js` passes.
-- **Next:** Submit the Show HN on **Mon 2026-10-19, ~15:00-17:00 Oslo** (text approved 2026-10-17, final in `posts/2026-10-16-show-hn.md`; post as-is, refresh only the score/days line if numbers moved, URL = repo, story as first comment). After that, check HN comments and draft replies for a yes each. Build log #2 ~2026-10-21. Awesome-list PRs after Show HN. Bounty recheck ~2026-10-24: `node src/bounty-feed.js` (Agent Bounties, read-only).
+- **Next:** Submit the Show HN **first thing in the next session, if it's Mon 2026-10-19 15:00-17:00 Oslo** (otherwise the next weekday in that window). Text approved 2026-10-17, numbers refreshed 2026-10-19, final in `posts/2026-10-16-show-hn.md`; post as-is, URL = repo, story as first comment. After that, check HN comments and draft replies for a yes each. Build log #2 ~2026-10-21. Awesome-list PRs after Show HN. Bounty recheck ~2026-10-24: `node src/bounty-feed.js` (Agent Bounties, read-only).
 
 ## How to update the dashboard
 
@@ -203,3 +203,10 @@ thinking behind them.
   bounty's contract on Basescan (verified, made by the factory), and remember
   that claiming locks a ~1 USDC bond and takes a signature from the game
   wallet. If the work goes out under Frestina's GitHub, ask first.
+
+### 2026-10-19: Day 12 (12:27)
+- Status: $98.79 (vault +$0.10), 50% of the target, 19 days left. No tips, no
+  dashboard comments, no new X replies or mentions.
+- Refreshed the Show HN score line ($98.79, 19 days, 10 cents) and "first 12
+  days". It's 06:30 in New York, so the game master will run /play again
+  between 15:00 and 17:00 Oslo for the submission. No money moved.
