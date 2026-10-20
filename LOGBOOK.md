@@ -12,7 +12,7 @@ thinking behind them.
 - **Dashboard:** live at https://frestina.github.io/wallet-game/ (GitHub Pages, main branch root). Comments on the claude.ai copy: https://claude.ai/artifact/VZH8ZuDxS5uoJPbbVaDG5B
 - **Accounts:** X @frestina87 (posting via Chromium; the Claude in Chrome browser named "Browser 1" is Chromium, checked via userAgentData), Hacker News `Frestina` (made 2026-10-08, for one Show HN), GitHub Frestina.
 - **Repo:** https://github.com/Frestina/wallet-game (public, MIT). Push session updates automatically after `node src/check-staged.js` passes.
-- **Next:** Submit the Show HN **first thing in the next session, if it's Mon 2026-10-19 15:00-17:00 Oslo** (otherwise the next weekday in that window). Text approved 2026-10-17, numbers refreshed 2026-10-19, final in `posts/2026-10-16-show-hn.md`; post as-is, URL = repo, story as first comment. After that, check HN comments and draft replies for a yes each. Build log #2 ~2026-10-21. Awesome-list PRs after Show HN. Bounty recheck ~2026-10-24: `node src/bounty-feed.js` (Agent Bounties, read-only).
+- **Next:** Show HN is **blocked** for now: HN restricts Show HNs from new accounts (2026-10-20). Don't try to get around it (no dropping "Show HN" from the title). Next reach step: draft 1-2 awesome-list PRs for the kit and show each to the game master for a yes. Build log #2 on X ~2026-10-21 (include the HN block as a lesson). Bounty recheck ~2026-10-24: `node src/bounty-feed.js` (Agent Bounties, read-only).
 
 ## How to update the dashboard
 
@@ -210,3 +210,21 @@ thinking behind them.
 - Refreshed the Show HN score line ($98.79, 19 days, 10 cents) and "first 12
   days". It's 06:30 in New York, so the game master will run /play again
   between 15:00 and 17:00 Oslo for the submission. No money moved.
+
+### 2026-10-20: Day 13 (13:20)
+- Status: $98.47 (ETH dipped; vault +$0.11), 49% of the target, 17 days 23
+  hours left. No tips, no dashboard comments, no new X replies or mentions
+  (checked in Chromium, verified by userAgentData).
+- The Monday Show HN slot was missed (no session on 2026-10-19). Refreshed the
+  numbers ($98.47, 18 days, 11 cents, "first 13 days"). Game master chose to
+  post now, at 13:20 Oslo, instead of waiting for 15:00.
+- **Show HN blocked.** Logged in as Frestina, filled in the title and the repo
+  URL, and clicked submit. HN redirected to /showlim: Show HNs are temporarily
+  restricted for accounts that are new to the site. I checked
+  /submitted?id=Frestina: nothing was posted. **Lesson:** a brand-new account
+  can't do a Show HN. Getting around it (a plain link post without "Show HN",
+  or farming karma) would be gaming the site, so it's ruled out (rule 2). If
+  the game master takes part on HN as themselves for a while, the Show HN may
+  open up later. The text stays ready in `posts/2026-10-16-show-hn.md`.
+- No money moved.
+

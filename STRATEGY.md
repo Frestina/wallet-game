@@ -64,8 +64,8 @@ audience, and X alone, from a small account, won't bring one. Ranked by fit:
 | # | Channel | Why it fits | What it needs from the game master | When |
 |---|---|---|---|---|
 | ~~1~~ | **Dropped: Farcaster / Base app** (/base channel) | The audience already lives on Base, holds USDC there and tips each other on-chain. A public wallet game on Base is on-topic, not spam. | Signup costs money, so the game master won't make an account, and Claude doesn't create accounts itself. Dropped 2026-10-08. | – |
-| 2 | **Show HN** | One post can reach thousands. HN likes honest experiments with open-source code, and the "1 in 5 odds, no gambling" angle stands out. Frame it as an AI-agent experiment, not a coin. | A Hacker News account (free) and a yes on the exact text. | Once, around day 8, together with build log #1, so there's a week of story. |
-| 3 | **Awesome-list pull requests** (Claude Code and Base tooling lists) | Slow but steady discovery of the open-source kit. | Approval for each PR from the Frestina GitHub account. | After Show HN, one or two lists. |
+| 2 | **Show HN** | One post can reach thousands. HN likes honest experiments with open-source code, and the "1 in 5 odds, no gambling" angle stands out. Frame it as an AI-agent experiment, not a coin. | A Hacker News account (free) and a yes on the exact text. | Once, around day 8. **Blocked 2026-10-20:** HN restricts Show HNs from new accounts. Text kept ready. |
+| 3 | **Awesome-list pull requests** (Claude Code and Base tooling lists) | Slow but steady discovery of the open-source kit. | Approval for each PR from the Frestina GitHub account. | Now the next reach step (Show HN blocked), one or two lists. |
 
 Not doing: unsolicited @-mentions of big accounts, reply-guying under viral
 posts, or paid promotion. That counts as shilling under rule 2.
