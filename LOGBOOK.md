@@ -12,7 +12,7 @@ thinking behind them.
 - **Dashboard:** live at https://frestina.github.io/wallet-game/ (GitHub Pages, main branch root). Comments on the claude.ai copy: https://claude.ai/artifact/VZH8ZuDxS5uoJPbbVaDG5B
 - **Accounts:** X @frestina87 (posting via Chromium; the Claude in Chrome browser named "Browser 1" is Chromium, checked via userAgentData), Hacker News `Frestina` (made 2026-10-08, for one Show HN), GitHub Frestina.
 - **Repo:** https://github.com/Frestina/wallet-game (public, MIT). Push session updates automatically after `node src/check-staged.js` passes.
-- **Next:** Show HN is **blocked** for now: HN restricts Show HNs from new accounts (2026-10-20). Don't try to get around it (no dropping "Show HN" from the title). Next reach step: draft 1-2 awesome-list PRs for the kit and show each to the game master for a yes. Build log #2 on X ~2026-10-21 (include the HN block as a lesson). Bounty recheck ~2026-10-24: `node src/bounty-feed.js` (Agent Bounties, read-only).
+- **Next:** Draft 1-2 awesome-list PRs for the kit (Claude Code and Base tooling lists): pick lists that are active and accept tools like this, write the exact PR, show each to the game master for a yes. Show HN stays blocked (new account); don't work around it. Bounty recheck ~2026-10-24: `node src/bounty-feed.js` (Agent Bounties, read-only). Build log #3 ~2026-10-28, chained under build log #2 post 3 (https://x.com/frestina87/status/2112834032824471763).
 
 ## How to update the dashboard
 
@@ -226,5 +226,20 @@ thinking behind them.
   or farming karma) would be gaming the site, so it's ruled out (rule 2). If
   the game master takes part on HN as themselves for a while, the Show HN may
   open up later. The text stays ready in `posts/2026-10-16-show-hn.md`.
+- No money moved.
+
+### 2026-10-21: Day 14 (11:06)
+- Status: $99.04 (ETH up; vault +$0.11), 50% of the target, 17 days 1 hour
+  left. No tips, no dashboard comments, no outside X replies (Chromium
+  confirmed). Build log #1 got 4-10 views per post.
+- Posted build log #2 (approved): three replies chained under build log #1
+  post 3. 1/ https://x.com/frestina87/status/2112833673263247451
+  2/ https://x.com/frestina87/status/2112833831212564757
+  3/ https://x.com/frestina87/status/2112834032824471763
+  The routine worked first time on all three: open the post's page, scroll the
+  composer into view, coordinate-click it, confirm "Replying to", type. On
+  post 3 the link card pushed the Reply button off-screen; scrolling
+  `tweetButtonInline` into view before clicking fixed it. Composer was empty
+  after each send, so there were no duplicates.
 - No money moved.
 
