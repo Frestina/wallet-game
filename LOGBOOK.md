@@ -12,7 +12,7 @@ thinking behind them.
 - **Dashboard:** live at https://frestina.github.io/wallet-game/ (GitHub Pages, main branch root). Comments on the claude.ai copy: https://claude.ai/artifact/VZH8ZuDxS5uoJPbbVaDG5B
 - **Accounts:** X @frestina87 (posting via Chromium; the Claude in Chrome browser named "Browser 1" is Chromium, checked via userAgentData), Hacker News `Frestina` (made 2026-10-08, for one Show HN), GitHub Frestina.
 - **Repo:** https://github.com/Frestina/wallet-game (public, MIT). Push session updates automatically after `node src/check-staged.js` passes.
-- **Next:** Draft 1-2 awesome-list PRs for the kit (Claude Code and Base tooling lists): pick lists that are active and accept tools like this, write the exact PR, show each to the game master for a yes. Show HN stays blocked (new account); don't work around it. Bounty recheck ~2026-10-24: `node src/bounty-feed.js` (Agent Bounties, read-only). Build log #3 ~2026-10-28, chained under build log #2 post 3 (https://x.com/frestina87/status/2112834032824471763).
+- **Next:** Bounty recheck ~2026-10-24: `node src/bounty-feed.js` (Agent Bounties, read-only). Check PR https://github.com/jqueryscript/awesome-claude-code/pull/830 each session (read-only; replies need a yes). Build log #3 ~2026-10-28, chained under build log #2 post 3 (https://x.com/frestina87/status/2112834032824471763). Big list (hesreallyhim/awesome-claude-code) waits for traction: human-only web-form submissions, the game master would submit it. Reach is still the bottleneck: think about one more honest channel.
 
 ## How to update the dashboard
 
@@ -241,5 +241,30 @@ thinking behind them.
   post 3 the link card pushed the Reply button off-screen; scrolling
   `tweetButtonInline` into view before clicking fixed it. Composer was empty
   after each send, so there were no duplicates.
+- No money moved.
+
+### 2026-10-22: Day 15 (13:41)
+- Status: $98.66 (ETH dipped; vault +$0.12), 50% of the target, 15 days 23
+  hours left. No tips, no dashboard comments. X not checked: the browser
+  extension wasn't connected.
+- Awesome-list research. No active Base or crypto-agent list (the few that
+  exist have under 300 stars or are stale). Two Claude Code lists fit:
+  - hesreallyhim/awesome-claude-code (56k stars): recommendations only via the
+    web issue form, "must be created by human beings", no PRs, and the
+    maintainer warns against using the list as promotion. The kit became
+    eligible today (14 days old). **Game master: wait for traction.**
+    The form values are saved in `posts/awesome-claude-code-form.md`.
+  - jqueryscript/awesome-claude-code (534 stars): takes PRs; the maintainer
+    adds them by hand in batches (last 2026-10-15), with 500+ open PRs.
+    **Approved and opened:** https://github.com/jqueryscript/awesome-claude-code/pull/830
+    (+1 line at the end of Guides & Learning, with a disclosure that Claude
+    wrote it).
+- **GitHub lesson:** on a fresh fork, API writes (contents PUT, git blobs)
+  kept returning 404 even with push permission. Creating the branch worked
+  after ~1 minute of retries, but file writes never did. What worked: clone
+  via `git@github-personal:Frestina/<repo>.git` into the scratchpad, set
+  `git config identity.active Frestina` plus the noreply user.email for that
+  clone only (the user's identity hook asks for this outside ~/Projects/Personal;
+  never --no-verify), commit, push, then `gh pr create`.
 - No money moved.
 
