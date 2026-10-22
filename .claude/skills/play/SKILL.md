@@ -48,3 +48,7 @@ user is on the Pro plan.
   message and `git push`. The game master approved automatic pushes on the
   condition that nothing sensitive goes out (2026-10-08).
 - End with a short summary of what changed and what's next.
+- If anything made by someone else came onto the computer this session (cloned
+  repos, downloaded files, saved web content), say in the summary what it was,
+  where it went, whether anything from it ran, and that it was cleaned up.
+  Delete it when done. If nothing came in, say so in one line.
