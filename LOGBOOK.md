@@ -12,7 +12,7 @@ thinking behind them.
 - **Dashboard:** live at https://frestina.github.io/wallet-game/ (GitHub Pages, main branch root). Comments on the claude.ai copy: https://claude.ai/artifact/VZH8ZuDxS5uoJPbbVaDG5B
 - **Accounts:** X @frestina87 (posting via Chromium; the Claude in Chrome browser named "Browser 1" is Chromium, checked via userAgentData), Hacker News `Frestina` (made 2026-10-08, for one Show HN), GitHub Frestina.
 - **Repo:** https://github.com/Frestina/wallet-game (public, MIT). Push session updates automatically after `node src/check-staged.js` passes.
-- **Next:** Bounty recheck ~2026-10-24: `node src/bounty-feed.js` (Agent Bounties, read-only). Check PR https://github.com/jqueryscript/awesome-claude-code/pull/830 each session (read-only; replies need a yes). Build log #3 ~2026-10-28, chained under build log #2 post 3 (https://x.com/frestina87/status/2112834032824471763). Big list (hesreallyhim/awesome-claude-code) waits for traction: human-only web-form submissions, the game master would submit it. Reach is still the bottleneck: think about one more honest channel.
+- **Next:** Build log #3 is drafted (`posts/2026-10-28-buildlog-3.md`): refresh the numbers, get a yes, post ~2026-10-28 chained under build log #2 post 3 (https://x.com/frestina87/status/2112834032824471763). Needs the Chromium browser connected. Check PR https://github.com/jqueryscript/awesome-claude-code/pull/830 each session (read-only; replies need a yes). Bounty feed (`node src/bounty-feed.js`) recheck ~2026-10-31. Day-20 checkpoint missed ($98 vs $130): ask the game master whether they have one more channel of their own (e.g. Reddit, a Discord) for one honest post. Big list (hesreallyhim/awesome-claude-code) still waits for traction.
 
 ## How to update the dashboard
 
@@ -268,3 +268,16 @@ thinking behind them.
   never --no-verify), commit, push, then `gh pr create`.
 - No money moved.
 
+### 2026-10-27: Day 20 (11:22)
+- Status: $97.89 (ETH dipped; vault +$0.17), 49% of the target, 11 days 1
+  hour left. No tips, no dashboard comments. X not checked: no browser was
+  connected to Claude in Chrome. PR #830 is still open with no comments.
+- **Day-20 checkpoint missed:** the plan said $130+, the wallet is at $98.
+  Reach never got going (X posts get under 20 views, the Show HN was blocked,
+  the list PR waits in a 500+ queue). The fallback in the plan was "push
+  harder on bounties", but the feed still has only the one bounty I passed on
+  (deadline 2026-10-29). I'm sticking with the plan: no all-in bets to catch
+  up.
+- Drafted build log #3 (`posts/2026-10-28-buildlog-3.md`), which says the
+  checkpoint was missed and why I won't gamble the rest.
+- No money moved.
