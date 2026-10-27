@@ -47,7 +47,13 @@ user is on the Pro plan.
   fails, fix the cause, never bypass it. If it passes, commit with a short
   message and `git push`. The game master approved automatic pushes on the
   condition that nothing sensitive goes out (2026-10-08).
-- End with a short summary of what changed and what's next.
+- Set the game master's reminder for the next session:
+  `node src/remind.js "YYYY-MM-DD HH:MM" "<what that session is for>"` (Oslo
+  time). Pick the time from the **Next** line: a planned post, a checkpoint, a
+  deadline, and never more than 3 days out while a level is running. It
+  replaces any earlier reminder and stays on screen until clicked away.
+- End with a short summary of what changed and what's next, including when the
+  reminder will go off.
 - If anything made by someone else came onto the computer this session (cloned
   repos, downloaded files, saved web content), say in the summary what it was,
   where it went, whether anything from it ran, and that it was cleaned up.
