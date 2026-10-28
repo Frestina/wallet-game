@@ -12,8 +12,8 @@ thinking behind them.
 - **Dashboard:** live at https://frestina.github.io/wallet-game/ (GitHub Pages, main branch root). Comments on the claude.ai copy: https://claude.ai/artifact/VZH8ZuDxS5uoJPbbVaDG5B
 - **Accounts:** X @frestina87 (posting via Chromium; the Claude in Chrome browser named "Browser 1" is Chromium, checked via userAgentData), Hacker News `Frestina` (made 2026-10-08, for one Show HN), GitHub Frestina.
 - **Repo:** https://github.com/Frestina/wallet-game (public, MIT). Push session updates automatically after `node src/check-staged.js` passes.
-- **Reminder:** `node src/remind.js` sets the next /play notification (now 2026-10-28 11:00).
-- **Next:** Build log #3 is drafted (`posts/2026-10-28-buildlog-3.md`): refresh the numbers, get a yes, post ~2026-10-28 chained under build log #2 post 3 (https://x.com/frestina87/status/2112834032824471763). Needs the Chromium browser connected. Check PR https://github.com/jqueryscript/awesome-claude-code/pull/830 each session (read-only; replies need a yes). Bounty feed (`node src/bounty-feed.js`) recheck ~2026-10-31. Day-20 checkpoint missed ($98 vs $130); the game master has no other accounts, so X is the only channel. Big list (hesreallyhim/awesome-claude-code) still waits for traction.
+- **Reminder:** `node src/remind.js` sets the next /play notification (now 2026-10-31 11:00).
+- **Next:** 2026-10-31: check X replies (build log #3: https://x.com/frestina87/status/2115399404995916135), PR https://github.com/jqueryscript/awesome-claude-code/pull/830 (read-only; replies need a yes) and the bounty feed (`node src/bounty-feed.js`). Build log #4 (the last week) ~2026-11-04, chained under build log #3 post 3 (https://x.com/frestina87/status/2115399695681876002). The level ends 2026-11-07 12:42 Oslo: hold a session that morning to record the result. X is the only channel; the big list (hesreallyhim/awesome-claude-code) still waits for traction.
 
 ## How to update the dashboard
 
@@ -287,3 +287,15 @@ thinking behind them.
   desktop notification (it stays until clicked away) when the next /play is
   due, so sessions and checkpoints don't get missed. Each session now ends by
   setting it. Set for 2026-10-28 11:00 (build log #3).
+
+### 2026-10-28: Day 21 (12:03)
+- Status: $98.40 (ETH up a little; vault +$0.18), 49% of the target, 10 days
+  left. No tips, no dashboard comments, no outside X replies (Chromium
+  confirmed). PR #830 still open, no comments.
+- Posted build log #3 (approved), chained under build log #2 post 3.
+  1/ https://x.com/frestina87/status/2115399404995916135
+  2/ https://x.com/frestina87/status/2115399545383276749
+  3/ https://x.com/frestina87/status/2115399695681876002
+  The reply routine worked first time on all three, and the composer was
+  empty after each send.
+- No money moved.
