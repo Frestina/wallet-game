@@ -12,8 +12,8 @@ thinking behind them.
 - **Dashboard:** live at https://frestina.github.io/wallet-game/ (GitHub Pages, main branch root). Comments on the claude.ai copy: https://claude.ai/artifact/VZH8ZuDxS5uoJPbbVaDG5B
 - **Accounts:** X @frestina87 (posting via Chromium; the Claude in Chrome browser named "Browser 1" is Chromium, checked via userAgentData), Hacker News `Frestina` (made 2026-10-08, for one Show HN), GitHub Frestina.
 - **Repo:** https://github.com/Frestina/wallet-game (public, MIT). Push session updates automatically after `node src/check-staged.js` passes.
-- **Reminder:** `node src/remind.js` sets the next /play notification (now 2026-10-31 11:00).
-- **Next:** 2026-10-31: check X replies (build log #3: https://x.com/frestina87/status/2115399404995916135), PR https://github.com/jqueryscript/awesome-claude-code/pull/830 (read-only; replies need a yes) and the bounty feed (`node src/bounty-feed.js`). Build log #4 (the last week) ~2026-11-04, with 1-2 hashtags on post 1 only (game master's idea, 2026-10-28): on 2026-10-31 check X search for which of #ClaudeCode, #Claude, #BuildOnBase have recent posts from real people; skip #Base (too generic). It is chained under build log #3 post 3 (https://x.com/frestina87/status/2115399695681876002). The level ends 2026-11-07 12:42 Oslo: hold a session that morning to record the result. X is the only channel; the big list (hesreallyhim/awesome-claude-code) still waits for traction.
+- **Reminder:** `node src/remind.js` sets the next /play notification (now 2026-11-02 11:00).
+- **Next:** 2026-11-02: refresh the numbers in build log #4 (`posts/2026-11-02-buildlog-4.md`, hashtags #ClaudeCode #BuildOnBase on post 1 only), get a yes, post it chained under build log #3 post 3 (https://x.com/frestina87/status/2115399695681876002). Needs Chromium connected. Also check X replies and PR https://github.com/jqueryscript/awesome-claude-code/pull/830 (read-only; replies need a yes). 2026-11-05: a check-in. The level ends 2026-11-07 12:42 Oslo: hold a session that morning to record the result and write the final report. The bounty feed is empty; the big list still waits for traction.
 
 ## How to update the dashboard
 
@@ -298,4 +298,18 @@ thinking behind them.
   3/ https://x.com/frestina87/status/2115399695681876002
   The reply routine worked first time on all three, and the composer was
   empty after each send.
+- No money moved.
+
+### 2026-10-30: Day 23 (15:17)
+- Status: $97.27 (ETH dipped; vault +$0.21), 49% of the target, 7 days 21
+  hours left. No tips, no dashboard comments, no outside X replies (Chromium
+  confirmed). Build log #3 post 1 has 2 views. PR #830 still open, no
+  comments. The bounty feed is empty (the one bounty I passed on expired).
+- Hashtag check on X (latest posts): #ClaudeCode is busy, with real people
+  posting every few minutes. #BuildOnBase is quiet (4 posts in 2 days) but
+  on-topic. #Claude is mixed with posts about a $CLAUDE meme token, so it's
+  left out. Build log #4 gets #ClaudeCode #BuildOnBase on post 1 only.
+- Drafted build log #4 (`posts/2026-11-02-buildlog-4.md`), the last week's:
+  score, what I learned (the plan was sound on money and weak on reach), and
+  what happens on 7 Nov.
 - No money moved.
