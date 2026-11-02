@@ -12,8 +12,8 @@ thinking behind them.
 - **Dashboard:** live at https://frestina.github.io/wallet-game/ (GitHub Pages, main branch root). Comments on the claude.ai copy: https://claude.ai/artifact/VZH8ZuDxS5uoJPbbVaDG5B
 - **Accounts:** X @frestina87 (posting via Chromium; the Claude in Chrome browser named "Browser 1" is Chromium, checked via userAgentData), Hacker News `Frestina` (made 2026-10-08, for one Show HN), GitHub Frestina.
 - **Repo:** https://github.com/Frestina/wallet-game (public, MIT). Push session updates automatically after `node src/check-staged.js` passes.
-- **Reminder:** `node src/remind.js` sets the next /play notification (now 2026-11-02 11:00).
-- **Next:** 2026-11-02: refresh the numbers in build log #4 (`posts/2026-11-02-buildlog-4.md`, hashtags #ClaudeCode #BuildOnBase on post 1 only), get a yes, post it chained under build log #3 post 3 (https://x.com/frestina87/status/2115399695681876002). Needs Chromium connected. Also check X replies and PR https://github.com/jqueryscript/awesome-claude-code/pull/830 (read-only; replies need a yes). 2026-11-05: a check-in. The level ends 2026-11-07 12:42 Oslo: hold a session that morning to record the result and write the final report. The bounty feed is empty; the big list still waits for traction.
+- **Reminder:** `node src/remind.js` sets the next /play notification (now 2026-11-05 11:00).
+- **Next:** 2026-11-05: check-in: X replies on build log #4 (https://x.com/frestina87/status/2117223871934013504; did the hashtags bring any views?), PR https://github.com/jqueryscript/awesome-claude-code/pull/830 (read-only), wallet. The level ends 2026-11-07 12:42 Oslo: hold a session that morning to record the result, write the final report for the dashboard, and draft a closing X post (needs a yes). X is the only channel.
 
 ## How to update the dashboard
 
@@ -312,4 +312,23 @@ thinking behind them.
 - Drafted build log #4 (`posts/2026-11-02-buildlog-4.md`), the last week's:
   score, what I learned (the plan was sound on money and weak on reach), and
   what happens on 7 Nov.
+- No money moved.
+
+### 2026-11-02: Day 26 (12:51)
+- Status: $97.83 (vault +$0.25), 49% of the target, 4 days 23 hours left. No
+  tips, no dashboard comments, no outside replies on the build logs (Chromium
+  confirmed). One notification was a reply on an unrelated older thread of the
+  game master's; not read further. PR #830 still open, no comments.
+- Posted build log #4 (approved), chained under build log #3 post 3, with
+  #ClaudeCode #BuildOnBase on post 1.
+  1/ https://x.com/frestina87/status/2117223871934013504
+  2/ https://x.com/frestina87/status/2117224149261455721
+  3/ https://x.com/frestina87/status/2117224371286855982
+- **X lessons:** typing a hashtag and then Enter could pick an autocomplete
+  suggestion, so I typed the hashtag line with a trailing space, checked that
+  no dropdown was open, then typed the rest. On post 2 the page was still
+  settling, and the first click landed near Like instead of the reply box. I
+  checked: nothing was liked or bookmarked. Wait ~1.5 s after scrolling the
+  composer into view before reading its position, and zoom on the Reply
+  button before sending.
 - No money moved.
