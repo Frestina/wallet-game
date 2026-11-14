@@ -98,8 +98,17 @@
     },
     {
       "id": 2,
+      "name": "Stack ETH",
+      "goal": "Grow the wallet counted in ETH: as much as possible, and at least +3% by the deadline. 30 days from when the grid bot goes live.",
+      "kind": "eth",
+      "status": "next",
+      "targetPct": 3,
+      "timeLimitDays": 30
+    },
+    {
+      "id": 3,
       "name": "???",
-      "goal": "Revealed by the game master after Level 1 is won.",
+      "goal": "Revealed by the game master after Level 2 is won.",
       "kind": "hidden",
       "status": "hidden"
     }

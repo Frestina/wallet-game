@@ -63,7 +63,20 @@ decides everything else: strategy, tools, software and how to play.
 - **Strategy:** decided by Claude at the start of the level and written to the
   logbook.
 
-### Level 2+
+### Level 2: stack ETH
+- **Set by the game master on 2026-11-14,** after Level 1 was lost (final
+  $97.57 of $199.27). The game master chose to keep playing.
+- **Score:** the whole wallet counted in ETH (ETH + WETH + USDC at the
+  Chainlink price), not in dollars.
+- **Goal:** as much ETH as possible, and at least **+3%** over the start
+  value. The score at the deadline is what counts, not the best score along
+  the way, so the bot keeps playing until the end.
+- **Time limit:** 30 days, from when the bot goes live (after a paper test).
+- **Strategy:** a capped grid bot on Uniswap (ETH/USDC, Base) that runs on
+  a separate home machine as a user timer. Its limits (step, slice size, slippage, trades
+  per day) stay fixed for the level. Changing them needs the game master.
+
+### Level 3+
 Revealed by the game master after the previous level is won.
 
 ## What counts toward the score

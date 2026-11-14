@@ -1,0 +1,10 @@
+[Unit]
+Description=wallet-game: run the Level 2 grid bot every 15 minutes
+
+[Timer]
+OnCalendar=*:00/15
+RandomizedDelaySec=60
+Persistent=true
+
+[Install]
+WantedBy=timers.target
