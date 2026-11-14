@@ -6,14 +6,15 @@ thinking behind them.
 
 ## Quick state
 
-- **Level:** 1 LOST. Ran 2026-10-08 13:42:33 to 2026-11-07 12:42:33 (Oslo). Start $99.64, target $199.27, final $97.57 at the deadline (Base block 54306891). No level is running; Level 2 is only revealed after a win, so what happens next is the game master's call.
+- **Level:** 2 "Stack ETH" in PAPER TEST (set 2026-11-14). Score in ETH; goal as much as possible, at least +3% at the deadline; 30 days from go-live. Level 1 LOST: $97.57 of $199.27 at the 2026-11-07 deadline (Base block 54306891).
+- **Bot:** `src/bot.js`, a systemd user timer (`wallet-game-bot`) every 15 min on the bot machine (name kept out of the repo; see Claude's memory). State in `~/.local/state/wallet-game/` there; logs `journalctl --user -u wallet-game-bot`. **Only the bot machine sends transactions**; sessions here only read, or run commands there over SSH.
 - **Wallet:** `0xFbE4C34cD9Bc33a83071C8380aB9Cf80dD97CdfF` (same address on Base and Base Sepolia)
 - **Key:** `~/.config/claude-game/wallet.key` (never print it, never copy it into the project)
 - **Dashboard:** live at https://frestina.github.io/wallet-game/ (GitHub Pages, main branch root). Comments on the claude.ai copy: https://claude.ai/artifact/VZH8ZuDxS5uoJPbbVaDG5B
 - **Accounts:** X @frestina87 (posting via Chromium; the Claude in Chrome browser named "Browser 1" is Chromium, checked via userAgentData), Hacker News `Frestina` (made 2026-10-08, for one Show HN), GitHub Frestina.
 - **Repo:** https://github.com/Frestina/wallet-game (public, MIT). Push session updates automatically after `node src/check-staged.js` passes.
-- **Reminder:** `node src/remind.js` sets the next /play notification (now 2026-11-16 11:00).
-- **Next:** waiting on the game master's answer to the Level 2 proposal (an ETH-scored level: a capped ETH/USDC grid bot on a systemd timer). Nothing gets built or traded until they set the goal. 2026-11-16 11:00 reminder still stands.
+- **Reminder:** `node src/remind.js` sets the next /play notification (now 2026-11-15 12:00).
+- **Next:** 2026-11-15 12:00: read the paper run (journal + trades.jsonl on the bot machine). If clean, show the game master the go-live steps and wait for a yes: on the bot machine, `wallet.js vault-out all`, wrap native ETH down to 0.002 fuel, swap to 50/50 WETH/USDC, `bot.js reset` state, set WALLET_GAME_MODE=live, record the start value in ETH and the deadline. The live swap path is untested: watch the first live trade closely. Update the dashboard for an ETH score (level kind "eth").
 
 ## How to update the dashboard
 
@@ -354,3 +355,27 @@ thinking behind them.
 - Game master: **skip the closing X post** (draft kept, marked skipped). They
   want to keep playing to see if I can make more ETH, and asked what I propose.
   Proposed Level 2 scored in ETH instead of dollars; see the chat for details.
+- **Level 2 set** (game master): score in ETH, as much as possible with at
+  least +3% at the deadline (not the peak), 30 days from go-live. The bot
+  runs on a separate home machine where the game master also tests another
+  trading bot, so it must stay apart from it.
+- Checked that machine read-only over SSH: the other bot runs as its own
+  system user from its own folder, trades ETHUSDT on an exchange (not on-chain)
+  and can't see /home. Ours is a **user** timer under the login user, its own
+  unit name, files under ~ only, capped at 256 MB with low CPU/IO priority.
+- Verified Uniswap v3 on Base: SwapRouter02 0x2626…e481, factory 0x3312…6FDfD
+  and the 0.05% WETH/USDC pool 0xd0b5…F224, both on-chain (router.factory,
+  router.WETH9, factory.getPool, pool.factory) and against Uniswap's
+  deployments page.
+- Built `src/bot.js`: a grid of 2% steps, $10 slices, max 6 trades a day, min-out
+  from Chainlink minus 0.5%, skips if the feed is stale or the pool price is
+  more than 1% off Chainlink, halts after 3 errors in a row or if gas ETH runs
+  low. Exact approvals per trade, never unlimited. Paper mode tested here
+  (hold, buy, sell), then installed on the bot machine: first run OK, 67 MB
+  peak, the other bot's services still active.
+- Copied the wallet key to the bot machine over SSH (approved), mode 600,
+  outside the repo; checked it gives the game address.
+- **Lesson:** a push hook blocks the bot machine's name as private. Added it
+  to `~/.config/claude-game/private-words` so `check-staged.js` catches it
+  before the commit.
+- No money moved.

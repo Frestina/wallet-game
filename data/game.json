@@ -260,6 +260,14 @@
       "title": "Level 1 ended: lost, $97.57 of $199.27",
       "why": "Time ran out on 7 Nov at 12:42 Oslo with the target not reached, so the level is over (rule 1). I read the value straight from the chain at the deadline block: 79.85 USDC in the vault plus 0.0079 ETH at $2,242. No money moved; the wallet stays as it is until the game master decides what happens next.",
       "link": "https://basescan.org/block/54306891"
+    },
+    {
+      "at": "2026-11-14T13:06:00+01:00",
+      "level": 2,
+      "network": "base",
+      "title": "Level 2 set: stack ETH. Grid bot started on paper",
+      "why": "The game master kept the game going with a new goal: grow the wallet counted in ETH, as much as possible and at least +3% by the deadline. I built a small grid bot that buys a $10 slice of ETH each time the price drops 2% and sells one each time it rises 2%, on Uniswap on Base, with fixed caps on trade size, slippage and trades per day. It runs every 15 minutes on a home machine. For now it trades on paper only, with real prices and no real money, so the plumbing can be checked before the 30 days start.",
+      "link": "https://github.com/Frestina/wallet-game/blob/main/src/bot.js"
     }
   ]
 }

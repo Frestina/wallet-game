@@ -1,5 +1,5 @@
 # wallet-game grid bot (Level 2). A systemd user unit on the bot machine, kept apart from
-# system-level trading-bot: different user, different name, files under ~ only.
+# the system-level trading-bot: different user, different name, files under ~ only.
 # Install: see deploy/README.md. Going live = change WALLET_GAME_MODE below to live.
 [Unit]
 Description=wallet-game: Level 2 grid bot (one run)
