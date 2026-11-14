@@ -6,14 +6,14 @@ thinking behind them.
 
 ## Quick state
 
-- **Level:** 1 ACTIVE. Started 2026-10-08 13:42:33 (Oslo), deadline 2026-11-07 12:42:33 (Oslo, CET). Start $99.64, target $199.27.
+- **Level:** 1 LOST. Ran 2026-10-08 13:42:33 to 2026-11-07 12:42:33 (Oslo). Start $99.64, target $199.27, final $97.57 at the deadline (Base block 54306891). No level is running; Level 2 is only revealed after a win, so what happens next is the game master's call.
 - **Wallet:** `0xFbE4C34cD9Bc33a83071C8380aB9Cf80dD97CdfF` (same address on Base and Base Sepolia)
 - **Key:** `~/.config/claude-game/wallet.key` (never print it, never copy it into the project)
 - **Dashboard:** live at https://frestina.github.io/wallet-game/ (GitHub Pages, main branch root). Comments on the claude.ai copy: https://claude.ai/artifact/VZH8ZuDxS5uoJPbbVaDG5B
 - **Accounts:** X @frestina87 (posting via Chromium; the Claude in Chrome browser named "Browser 1" is Chromium, checked via userAgentData), Hacker News `Frestina` (made 2026-10-08, for one Show HN), GitHub Frestina.
 - **Repo:** https://github.com/Frestina/wallet-game (public, MIT). Push session updates automatically after `node src/check-staged.js` passes.
-- **Reminder:** `node src/remind.js` sets the next /play notification (now 2026-11-05 11:00).
-- **Next:** 2026-11-05: check-in: X replies on build log #4 (https://x.com/frestina87/status/2117223871934013504; did the hashtags bring any views?), PR https://github.com/jqueryscript/awesome-claude-code/pull/830 (read-only), wallet. The level ends 2026-11-07 12:42 Oslo: hold a session that morning to record the result, write the final report for the dashboard, and draft a closing X post (needs a yes). X is the only channel.
+- **Reminder:** `node src/remind.js` sets the next /play notification (now 2026-11-16 11:00).
+- **Next:** 2026-11-16: post the closing thread (`posts/2026-11-16-closing.md`) under build log #4 post 3, if the game master says yes (needs a Chromium browser connected). Ask the game master what happens to the wallet now: leave it parked in the vault, withdraw it to them, or a new attempt under new rules. Check X replies on build log #4 (read-only) and PR #830.
 
 ## How to update the dashboard
 
@@ -332,3 +332,22 @@ thinking behind them.
   composer into view before reading its position, and zoom on the Reply
   button before sending.
 - No money moved.
+
+### 2026-11-14: Level 1 result (11:49, a week after the deadline)
+- **Missed sessions:** the 2026-11-05 check-in and the 2026-11-07 closing
+  session never happened; this is the first session since 2026-11-02. The
+  desktop reminder for 11-05 was set but no session followed.
+- **Level 1 lost.** Read the wallet at the deadline block straight from the
+  chain (binary search on block timestamps, Base block 54306891 =
+  2026-11-07 11:42:33 UTC): 79.848932 aUSDC + 0.007902 ETH at $2,242.09
+  (Chainlink ETH/USD) = **$97.57** of $199.27. Today it's $94.99 (ETH ~$1,960).
+  **Lesson:** Base blocks are no longer 2 s apart (1M blocks covered only ~2
+  days), so find a block by timestamp with a full binary search, not an
+  estimate from block time.
+- No tips, no dashboard comments, no new transactions (nonce still 2). PR #830
+  still open, no comments. X not checked: no browser connected.
+- Wrote the final report on the dashboard (new `report` block on the level,
+  and the score line shows the final value) and logged the result as a move.
+  Drafted the closing X thread (`posts/2026-11-16-closing.md`), waiting for a yes.
+- No money moved. The wallet stays as it is (vault keeps earning) until the
+  game master decides.

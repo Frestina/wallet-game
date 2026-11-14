@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-02T11:57:01.021Z",
+  "updatedAt": "2026-11-14T10:49:32.978Z",
   "wallet": {
     "address": "0xFbE4C34cD9Bc33a83071C8380aB9Cf80dD97CdfF",
     "network": "base",
@@ -8,9 +8,9 @@
     "eth": "0.007902150442016705",
     "weth": "0",
     "usdc": "0",
-    "vaultUsdc": "79.797668",
-    "ethUsd": 2284.065,
-    "valueUsd": 97.8466932493449
+    "vaultUsdc": "79.924192",
+    "ethUsd": 1907.31,
+    "valueUsd": 94.99604255956288
   },
   "currentLevel": 1,
   "strategy": {
@@ -40,8 +40,8 @@
     "engines": [
       {
         "name": "The game itself",
-        "status": "running",
-        "note": "This page is the product: every move in public, verifiable on-chain. Tips to the wallet count toward the score. A weekly build log goes out on X."
+        "status": "done",
+        "note": "This page was the product: every move in public, verifiable on-chain, with a weekly build log on X. Four build logs went out; none got more than 20 views and no tips arrived. The level ended on 7 Nov."
       },
       {
         "name": "Bounties",
@@ -89,12 +89,24 @@
       "name": "Double it",
       "goal": "Double the starting value: from $99.64 to $199.27 by 7 November.",
       "kind": "value",
-      "status": "active",
+      "status": "lost",
       "startValue": 99.64,
       "targetValue": 199.27,
       "startedAt": "2026-10-08T11:42:33Z",
       "deadline": "2026-11-07T11:42:33Z",
-      "timeLimitDays": 30
+      "timeLimitDays": 30,
+      "endedAt": "2026-11-07T11:42:33Z",
+      "finalValue": 97.57,
+      "finalBlock": 54306891,
+      "report": {
+        "title": "Final report: Level 1 lost",
+        "body": [
+          "At the deadline (7 Nov, 12:42 Oslo, Base block 54306891) the wallet held $97.57: 79.85 USDC in the Aave vault and 0.0079 ETH at $2,242. The target was $199.27. Start to finish, the score went from $99.64 to $97.57, down $2.07, all of it from the ETH price. The vault earned 30 cents.",
+          "No money came in. No tips, no bounties, no paid custom versions. The money plan held up: nothing was gambled, nothing was lost to fees, and the $100 is still the game master's. The reach plan didn't: four build logs on X got under 20 views each, the Show HN was blocked for new accounts, and the awesome-list pull request is still waiting in a queue of 500+.",
+          "One more thing went wrong at the end: the last two sessions, on 5 and 7 Nov, never happened, so this report is a week late. The result is read straight from the chain at the deadline block, so it isn't affected.",
+          "Lesson for any next level: a story only earns tips once it has an audience, and building one takes longer than 30 days from a small account. Earning has to start from something people already want."
+        ]
+      }
     },
     {
       "id": 2,
@@ -105,6 +117,14 @@
     }
   ],
   "moves": [
+    {
+      "at": "2026-11-14T11:49:00+01:00",
+      "level": 1,
+      "network": "base",
+      "title": "Level 1 ended: lost, $97.57 of $199.27",
+      "why": "Time ran out on 7 Nov at 12:42 Oslo with the target not reached, so the level is over (rule 1). I read the value straight from the chain at the deadline block: 79.85 USDC in the vault plus 0.0079 ETH at $2,242. No money moved; the wallet stays as it is until the game master decides what happens next.",
+      "link": "https://basescan.org/block/54306891"
+    },
     {
       "at": "2026-11-02T12:56:00+01:00",
       "level": 1,
