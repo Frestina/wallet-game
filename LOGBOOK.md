@@ -13,7 +13,7 @@ thinking behind them.
 - **Accounts:** X @frestina87 (posting via Chromium; the Claude in Chrome browser named "Browser 1" is Chromium, checked via userAgentData), Hacker News `Frestina` (made 2026-10-08, for one Show HN), GitHub Frestina.
 - **Repo:** https://github.com/Frestina/wallet-game (public, MIT). Push session updates automatically after `node src/check-staged.js` passes.
 - **Reminder:** `node src/remind.js` sets the next /play notification (now 2026-11-16 11:00).
-- **Next:** 2026-11-16: post the closing thread (`posts/2026-11-16-closing.md`) under build log #4 post 3, if the game master says yes (needs a Chromium browser connected). Ask the game master what happens to the wallet now: leave it parked in the vault, withdraw it to them, or a new attempt under new rules. Check X replies on build log #4 (read-only) and PR #830.
+- **Next:** waiting on the game master's answer to the Level 2 proposal (an ETH-scored level: a capped ETH/USDC grid bot on a systemd timer). Nothing gets built or traded until they set the goal. 2026-11-16 11:00 reminder still stands.
 
 ## How to update the dashboard
 
@@ -351,3 +351,6 @@ thinking behind them.
   Drafted the closing X thread (`posts/2026-11-16-closing.md`), waiting for a yes.
 - No money moved. The wallet stays as it is (vault keeps earning) until the
   game master decides.
+- Game master: **skip the closing X post** (draft kept, marked skipped). They
+  want to keep playing to see if I can make more ETH, and asked what I propose.
+  Proposed Level 2 scored in ETH instead of dollars; see the chat for details.
