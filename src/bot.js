@@ -6,6 +6,7 @@
 //   node src/bot.js            one run (mode from WALLET_GAME_MODE: paper | live, default paper)
 //   node src/bot.js status     print the bot state
 //   node src/bot.js reset      clear a halt (after a human looked at why)
+//   node src/bot.js split      go-live: balance WETH/USDC 50/50 (dry run; add --send to swap)
 //
 // Grid rule: when the Chainlink price is STEP below the last trade price, buy a slice of WETH
 // with USDC; when it's STEP above, sell a slice of WETH for USDC. One trade per run.
@@ -100,6 +101,34 @@ async function swapLive(pub, w, account, side, amountIn, minOut) {
   return hashes;
 }
 
+// One-time go-live step: swap WETH or USDC so both sides hold about the same value. Uses the
+// same guards as a grid trade (fresh feed, pool close to Chainlink, min-out at Chainlink minus
+// slippage). Without --send it only prints what it would do.
+async function split(send) {
+  const account = privateKeyToAccount(readFileSync(KEY_FILE, "utf8").trim());
+  const { pub, wallet } = clients(net);
+  const m = await readMarket(pub, account.address);
+  if (m.feedAgeSec > LIMITS.maxFeedAgeSec) throw new Error(`Chainlink price is ${m.feedAgeSec}s old`);
+  const drift = Math.abs(m.poolPrice / m.price - 1) * 100;
+  if (drift > LIMITS.maxPoolDriftPct) throw new Error(`pool and Chainlink differ ${drift.toFixed(2)}%`);
+  const usdc = Number(formatUnits(m.usdc, 6)), weth = Number(formatEther(m.weth));
+  const diffUsd = (usdc - weth * m.price) / 2; // >0: buy WETH with this much USDC; <0: sell WETH
+  const keep = 1 - LIMITS.maxSlippagePct / 100;
+  console.log(`price $${m.price.toFixed(2)} (pool drift ${drift.toFixed(2)}%), ${weth.toFixed(6)} WETH + ${usdc.toFixed(2)} USDC`);
+  if (Math.abs(diffUsd) < 1) return console.log("already balanced");
+  if (diffUsd > 0) {
+    const amountIn = parseUnits(diffUsd.toFixed(6), 6), minOut = parseEther(((diffUsd / m.price) * keep).toFixed(18));
+    console.log(`buy: ${diffUsd.toFixed(2)} USDC -> at least ${formatEther(minOut)} WETH`);
+    if (send) console.log("tx", (await swapLive(pub, wallet(account), account, "buy", amountIn, minOut)).join(" "));
+  } else {
+    const wethIn = -diffUsd / m.price;
+    const amountIn = parseEther(wethIn.toFixed(18)), minOut = parseUnits((-diffUsd * keep).toFixed(6), 6);
+    console.log(`sell: ${wethIn.toFixed(6)} WETH -> at least ${formatUnits(minOut, 6)} USDC`);
+    if (send) console.log("tx", (await swapLive(pub, wallet(account), account, "sell", amountIn, minOut)).join(" "));
+  }
+  if (!send) console.log("dry run: add --send to swap");
+}
+
 async function run() {
   const account = privateKeyToAccount(readFileSync(KEY_FILE, "utf8").trim());
   const { pub, wallet } = clients(net);
@@ -188,4 +217,5 @@ async function run() {
 const cmd = process.argv[2];
 if (cmd === "status") console.log(JSON.stringify(readState(), null, 2));
 else if (cmd === "reset") { const s = readState(); if (s) { s.halted = null; s.errors = 0; writeState(s); } console.log("cleared"); }
+else if (cmd === "split") split(process.argv[3] === "--send").catch((e) => { console.error(`split failed: ${e.shortMessage ?? e.message}`); process.exit(1); });
 else run().catch((e) => { log(`fatal: ${e.shortMessage ?? e.message}`); process.exit(1); });
