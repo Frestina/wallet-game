@@ -7,7 +7,7 @@ thinking behind them.
 ## Quick state
 
 - **Level:** 2 "Stack ETH" LIVE since 2026-11-15 12:08 Oslo (11:08:12 UTC). Score in ETH at the Chainlink price. Start **0.051607 ETH** (anchor $1,828.50), goal at least **0.053155 ETH** (+3%) at the deadline **2026-12-15 12:08 Oslo**. Level 1 LOST: $97.57 of $199.27 at the 2026-11-07 deadline (Base block 54306891).
-- **Bot:** `src/bot.js`, LIVE (`WALLET_GAME_MODE=live` in the unit file), a systemd user timer (`wallet-game-bot`) every 15 min on the bot machine (name kept out of the repo; see Claude's memory). State in `~/.local/state/wallet-game/` there (`grid.json`, `trades.jsonl`; paper run archived as `paper-*.json*`); logs `journalctl --user -u wallet-game-bot`. **Only the bot machine sends transactions**; sessions here only read, or run commands there over SSH. To log bot trades: read `trades.jsonl` there and add each as a move.
+- **Bot:** `src/bot.js`, LIVE (`WALLET_GAME_MODE=live` in the unit file), a systemd user timer (`wallet-game-bot`) every 15 min on the bot machine (name kept out of the repo; see Claude's memory). State in `~/.local/state/wallet-game/` there (`grid.json`, `trades.jsonl`; paper run archived as `paper-*.json*`); logs `journalctl --user -u wallet-game-bot`. **Only the bot machine sends transactions**; sessions here only read, or run commands there over SSH. To log bot trades: read `trades.jsonl` there and add each as a move. **Status page:** `src/bot-dash.js` as user service `wallet-game-dash`, read-only, on the bot machine's Tailscale address, port 8788 (the address stays out of the repo; it's in the installed unit).
 - **Wallet:** `0xFbE4C34cD9Bc33a83071C8380aB9Cf80dD97CdfF` (same address on Base and Base Sepolia)
 - **Key:** `~/.config/claude-game/wallet.key` (never print it, never copy it into the project)
 - **Dashboard:** live at https://frestina.github.io/wallet-game/ (GitHub Pages, main branch root). Comments on the claude.ai copy: https://claude.ai/artifact/VZH8ZuDxS5uoJPbbVaDG5B
@@ -403,4 +403,14 @@ thinking behind them.
   between snapshots for a tip; now it only counts when no token balance fell.
 - Honest odds of +3% at the deadline: about 1 in 3. A one-way ETH rally is the
   main risk, since half the wallet is USDC.
+- 12:40: the game master showed me the other bot's status page and asked for
+  one like it. Built `src/bot-dash.js`: a read-only page (no JS, strict CSP,
+  GET only, chain reads cached 60 s) with holdings in ETH vs the start, the
+  goal and a just-hold-50/50 benchmark, next buy/sell prices, live trades
+  with tx links, the last 30 runs from the journal, and the fixed limits. It
+  never loads the key. `bot.js` now exports its limits and price read, and
+  only runs when started directly; tested both ways before pulling it onto
+  the live bot. Installed as user service `wallet-game-dash` on port 8788,
+  bound to the Tailscale address only (the other bot's page is on 8787).
+  Both bots' services still active. No money moved.
 
