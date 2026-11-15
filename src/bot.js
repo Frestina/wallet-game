@@ -11,9 +11,10 @@
 // Grid rule: when the Chainlink price is STEP below the last trade price, buy a slice of WETH
 // with USDC; when it's STEP above, sell a slice of WETH for USDC. One trade per run.
 // Hard limits below are fixed for the whole level; changing them needs the game master.
-import { appendFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { appendFileSync, existsSync, mkdirSync, readFileSync, realpathSync, writeFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { erc20Abi, formatEther, formatUnits, parseAbi, parseEther, parseUnits } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import { getNetwork } from "./networks.js";
@@ -214,8 +215,14 @@ async function run() {
   }
 }
 
-const cmd = process.argv[2];
-if (cmd === "status") console.log(JSON.stringify(readState(), null, 2));
+// Shared with the read-only status page (src/bot-dash.js), which imports this file without
+// running the bot: the commands below only run when bot.js itself is the program started.
+export { LIMITS, UNI, STATE_DIR, STATE_FILE, TRADES_FILE, readMarket };
+
+const isMain = process.argv[1] && realpathSync(process.argv[1]) === fileURLToPath(import.meta.url);
+const cmd = isMain ? process.argv[2] : "imported";
+if (cmd === "imported") { /* used as a library */ }
+else if (cmd === "status") console.log(JSON.stringify(readState(), null, 2));
 else if (cmd === "reset") { const s = readState(); if (s) { s.halted = null; s.errors = 0; writeState(s); } console.log("cleared"); }
 else if (cmd === "split") split(process.argv[3] === "--send").catch((e) => { console.error(`split failed: ${e.shortMessage ?? e.message}`); process.exit(1); });
 else run().catch((e) => { log(`fatal: ${e.shortMessage ?? e.message}`); process.exit(1); });

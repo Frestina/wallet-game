@@ -1,0 +1,27 @@
+# wallet-game: read-only status page for the grid bot. A systemd user unit on the bot machine,
+# kept apart from the system-level trading-bot (its own user, name, port and files).
+# Install: see deploy/README.md. Set DASH_HOST to the machine's Tailscale address, so the page
+# is only reachable over Tailscale.
+[Unit]
+Description=wallet-game: grid bot status page (read-only)
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/Projects/Personal/claude-game
+Environment=DASH_HOST=127.0.0.1
+Environment=DASH_PORT=8788
+ExecStart=/usr/bin/node src/bot-dash.js
+# Tailscale may not be up yet at boot, so binding its address can fail at first: retry.
+Restart=on-failure
+RestartSec=15
+MemoryMax=128M
+CPUWeight=10
+Nice=15
+IOSchedulingClass=idle
+NoNewPrivileges=yes
+SyslogIdentifier=wallet-game-dash
+
+[Install]
+WantedBy=default.target

@@ -103,7 +103,12 @@
       "deadline": "2026-12-15T11:08:12Z",
       "startValueEth": 0.051607,
       "targetValueEth": 0.053155,
-      "startPrice": 1828.5
+      "startPrice": 1828.5,
+      "startHoldings": {
+        "eth": 0.001999663404074818,
+        "weth": 0.024799287532712683,
+        "usdc": 45.361583
+      }
     },
     {
       "id": 3,

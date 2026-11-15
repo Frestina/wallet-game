@@ -13,3 +13,16 @@ user, unit name, folder or log with the separate `trading-bot` system service th
 - State and trades: `~/.local/state/wallet-game/` (`grid.json`, `trades.jsonl`)
 - Status: `node src/bot.js status`. Clear a halt: `node src/bot.js reset`
 - Only the bot machine sends transactions. Sessions on the main machine only read.
+
+## Status page (read-only)
+
+`src/bot-dash.js` serves a private status page: holdings in ETH against the start, the goal
+and a just-hold benchmark, the next buy and sell prices, live trades with tx links, the last
+runs from the journal, and the fixed limits. It never loads the wallet key or sends anything.
+
+    cp deploy/wallet-game-dash.service ~/.config/systemd/user/
+    # set DASH_HOST in the copied unit to the machine's Tailscale address (tailscale ip -4)
+    systemctl --user daemon-reload && systemctl --user enable --now wallet-game-dash
+
+- Open: `http://<tailscale address>:8788/` from any device on the tailnet
+- Logs: `journalctl --user -u wallet-game-dash`
