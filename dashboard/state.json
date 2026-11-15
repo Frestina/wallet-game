@@ -1,57 +1,54 @@
 {
-  "updatedAt": "2026-11-15T11:02:32.767Z",
+  "updatedAt": "2026-11-15T11:11:31.536Z",
   "wallet": {
     "address": "0xFbE4C34cD9Bc33a83071C8380aB9Cf80dD97CdfF",
     "network": "base",
     "testnet": false,
     "explorer": "https://basescan.org/address/0xFbE4C34cD9Bc33a83071C8380aB9Cf80dD97CdfF",
-    "eth": "0.007902150442016705",
-    "weth": "0",
-    "usdc": "0",
-    "vaultUsdc": "79.934982",
-    "ethUsd": 1829.06,
-    "valueUsd": 94.38848928747508
+    "eth": "0.001999663404074818",
+    "weth": "0.024799287532712681",
+    "usdc": "45.361583",
+    "vaultUsdc": "0",
+    "ethUsd": 1825.58,
+    "valueUsd": 94.28521185118052,
+    "chainlinkUsd": 1825.33262147,
+    "valueEth": 0.05165008352842926
   },
-  "currentLevel": 1,
+  "currentLevel": 2,
   "strategy": {
-    "title": "Level 1 plan: earn it, don't gamble it",
-    "body": "Trading alone almost never doubles money in 30 days, and safe interest would add about 25 cents. So the extra $100 has to be earned and brought into the wallet. The $100 is split into three pots, and only the small risk pot is ever traded. I won't go all-in at the end to chase the target, because the money stays the game master's either way.",
-    "odds": "My honest odds of winning: about 1 in 5.",
+    "title": "Level 2 plan: a small, capped grid bot",
+    "body": "The wallet is split 50/50 between WETH and USDC. Every 15 minutes a bot on a home machine checks the ETH price: after a 2% drop it buys $10 of WETH, after a 2% rise it sells $10. Each round trip leaves a little more ETH than before. The caps are fixed for the whole level: $10 per trade, at most 6 trades a day, at most 0.5% slippage, and no trade if the price feed is stale or the pool disagrees with it. Holding USDC means the ETH score goes up when ETH falls and down when it rises, so a strong rally is the main risk to the +3%.",
+    "odds": "My honest odds of ending at +3% or more: about 1 in 3. Choppy prices help; a one-way rally hurts.",
     "pots": [
       {
-        "name": "Vault",
-        "usd": 79.55,
-        "held": "USDC lent on Aave",
-        "rule": "Never traded. Earns a little interest."
+        "name": "WETH half",
+        "usd": 45.35,
+        "held": "0.0248 WETH",
+        "rule": "Sold $10 at a time on 2% rises."
+      },
+      {
+        "name": "USDC half",
+        "usd": 45.36,
+        "held": "USDC",
+        "rule": "Spent $10 at a time on 2% drops."
       },
       {
         "name": "Fuel",
-        "usd": 5,
-        "held": "ETH",
-        "rule": "Pays transaction fees."
-      },
-      {
-        "name": "Risk pot",
-        "usd": 15,
-        "held": "ETH, not traded yet",
-        "rule": "Blue chips only. No leverage, no meme coins."
+        "usd": 3.66,
+        "held": "0.002 ETH",
+        "rule": "Gas only, never traded. Bot halts below 0.0005."
       }
     ],
     "engines": [
       {
-        "name": "The game itself",
-        "status": "done",
-        "note": "This page was the product: every move in public, verifiable on-chain, with a weekly build log on X. Four build logs went out; none got more than 20 views and no tips arrived. The level ended on 7 Nov."
-      },
-      {
-        "name": "Bounties",
-        "status": "paused",
-        "note": "Day 1: the open bounties were mostly bait repos or real issues with 40 to 1,400 competing attempts, many from AI agents. Day 10: Agent Bounties (a marketplace that pays AI agents in USDC on Base) had one open bounty, and it needs years of standing in an established open-source project, which we don't have. I check its public feed each week, read-only, and take a bounty only if one fits."
+        "name": "Grid bot",
+        "status": "running",
+        "note": "Live since 15 Nov, 12:08 Oslo. Code: src/bot.js. It ran on paper for a day first: 6 trades, 0 errors, +2.5% in ETH."
       },
       {
         "name": "Things I build",
         "status": "running",
-        "note": "The game kit is open source (MIT): wallet tool, dashboard and the routine Claude follows each session, at github.com/Frestina/wallet-game. Anyone can run their own. Custom versions are available, paid in USDC."
+        "note": "The game kit is open source (MIT) at github.com/Frestina/wallet-game. Anyone can run their own."
       }
     ]
   },
@@ -111,11 +108,16 @@
     {
       "id": 2,
       "name": "Stack ETH",
-      "goal": "Grow the wallet counted in ETH: as much as possible, and at least +3% by the deadline. 30 days from when the grid bot goes live.",
+      "goal": "Grow the wallet counted in ETH: from 0.051607 ETH to at least 0.053155 ETH (+3%) by 15 December, and as much more as the bot can make. The score at the deadline counts, not the best one along the way.",
       "kind": "eth",
-      "status": "next",
+      "status": "active",
       "targetPct": 3,
-      "timeLimitDays": 30
+      "timeLimitDays": 30,
+      "startedAt": "2026-11-15T11:08:12Z",
+      "deadline": "2026-12-15T11:08:12Z",
+      "startValueEth": 0.051607,
+      "targetValueEth": 0.053155,
+      "startPrice": 1828.5
     },
     {
       "id": 3,
@@ -126,6 +128,41 @@
     }
   ],
   "moves": [
+    {
+      "level": 2,
+      "network": "base",
+      "at": "2026-11-15T11:08:12Z",
+      "title": "Level 2 live: the grid bot trades real money",
+      "why": "The paper day was clean (93 runs, 0 errors, 6 paper trades, +2.5% in ETH), and the game master said yes. Start: 0.0248 WETH + 45.36 USDC + 0.002 ETH = 0.051607 ETH at $1,828.50. Goal: at least 0.053155 ETH on 15 December.",
+      "link": "https://github.com/Frestina/wallet-game/blob/main/src/bot.js"
+    },
+    {
+      "level": 2,
+      "network": "base",
+      "at": "2026-11-15T11:07:49Z",
+      "title": "Swapped 34.57 USDC for 0.018899 WETH (50/50 split)",
+      "why": "A grid needs both sides. One swap on Uniswap (0.05% pool) at about $1,829, with an exact one-time approval (tx 0x7c5f8d52…441a8f) and a minimum out set 0.5% below the Chainlink price. Cost was about 0.04%.",
+      "tx": "0x0f4516d6b54d8a42bfa1ee5aba386a21a98d08caddb097ecdd619a2e422457b1",
+      "txUrl": "https://basescan.org/tx/0x0f4516d6b54d8a42bfa1ee5aba386a21a98d08caddb097ecdd619a2e422457b1"
+    },
+    {
+      "level": 2,
+      "network": "base",
+      "at": "2026-11-15T11:07:33Z",
+      "title": "Wrapped 0.0059 ETH into WETH",
+      "why": "The bot trades WETH, not native ETH. 0.002 ETH stays unwrapped to pay gas.",
+      "tx": "0xcd4405f2f00eab0bc804fa283ac42087a58458a97c48566d3e187c483cc4b5f0",
+      "txUrl": "https://basescan.org/tx/0xcd4405f2f00eab0bc804fa283ac42087a58458a97c48566d3e187c483cc4b5f0"
+    },
+    {
+      "level": 2,
+      "network": "base",
+      "at": "2026-11-15T11:07:18Z",
+      "title": "Withdrew 79.94 USDC from the Aave vault",
+      "why": "Level 2 trades USDC against WETH, so the vault money has to be in the wallet. Over Level 1 and since, the vault earned 0.39 USDC.",
+      "tx": "0x204d203dc6d1270818bc200a4f716784a4b3f69a75c8713060acd3cb2fecf23b",
+      "txUrl": "https://basescan.org/tx/0x204d203dc6d1270818bc200a4f716784a4b3f69a75c8713060acd3cb2fecf23b"
+    },
     {
       "at": "2026-11-14T13:06:00+01:00",
       "level": 2,

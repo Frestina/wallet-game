@@ -306,8 +306,10 @@ function render() {
   const pill = el("span", "pill " + lvl.status, statusWord[lvl.status] ?? lvl.status);
   $("lvl-pill").replaceChildren(pill);
 
-  $("score").textContent = usd(w.valueUsd);
-  $("score-sub").textContent = w.testnet ? "Test coins, worth nothing for real" : (lvl.kind === "value" ? (lvl.finalValue != null ? `Final ${usd(lvl.finalValue)} at the deadline · target ${usd(lvl.targetValue)}` : `Target ${usd(lvl.targetValue)}`) : "");
+  const ethNum = (x) => x == null ? "–" : x.toFixed(6) + " ETH";
+  const pct = (x) => (x >= 0 ? "+" : "") + x.toFixed(2) + "%";
+  $("score").textContent = lvl.kind === "eth" ? ethNum(w.valueEth) : usd(w.valueUsd);
+  $("score-sub").textContent = w.testnet ? "Test coins, worth nothing for real" : (lvl.kind === "value" ? (lvl.finalValue != null ? `Final ${usd(lvl.finalValue)} at the deadline · target ${usd(lvl.targetValue)}` : `Target ${usd(lvl.targetValue)}`) : lvl.kind === "eth" && w.valueEth != null ? `${pct((w.valueEth / lvl.startValueEth - 1) * 100)} vs start · goal ${ethNum(lvl.targetValueEth)} · now ${usd(w.valueUsd)}` : "");
 
   $("goal-text").textContent = lvl.goal;
   const rep = $("report");
@@ -336,6 +338,17 @@ function render() {
     meter.append(fill);
     const scale = el("div", "meter-scale");
     scale.append(el("span", null, "$0"), el("span", null, `Start ${usd(lvl.startValue)}`), el("span", null, `Goal ${usd(max)}`));
+    prog.append(meter, scale);
+  } else if (lvl.kind === "eth" && lvl.startValueEth) {
+    // Meter runs from -3% to the +3% goal, start in the middle.
+    const v = w.valueEth ?? lvl.startValueEth, lo = lvl.startValueEth * 2 - lvl.targetValueEth, max = lvl.targetValueEth;
+    const meter = el("div", "meter");
+    meter.setAttribute("role", "progressbar");
+    meter.setAttribute("aria-valuemin", lo.toFixed(6)); meter.setAttribute("aria-valuemax", max.toFixed(6)); meter.setAttribute("aria-valuenow", v.toFixed(6));
+    const fill = el("div", "meter-fill"); fill.style.width = Math.max(0, Math.min(100, ((v - lo) / (max - lo)) * 100)) + "%";
+    meter.append(fill);
+    const scale = el("div", "meter-scale");
+    scale.append(el("span", null, `−${lvl.targetPct}%`), el("span", null, `Start ${lvl.startValueEth.toFixed(4)}`), el("span", null, `Goal +${lvl.targetPct}%`));
     prog.append(meter, scale);
   }
 
@@ -459,14 +472,19 @@ const clockTime = (d) => d.toLocaleTimeString("en-GB", { hour: "2-digit", minute
 async function refreshLive() {
   const w = state.wallet;
   const b = await readChain(w.address);
-  // Money that arrived: growth in holdings at today's price, so price moves and swaps don't count.
+  // Money that arrived: growth in holdings at today's price, so price moves don't count. A bot
+  // swap lowers one token while raising another, so if any token went down, it's not a tip.
   const holdings = (x) => Number(x.usdc) + Number(x.vaultUsdc ?? 0) + (Number(x.eth) + Number(x.weth ?? 0)) * b.ethUsd;
-  const arrived = holdings(b) - holdings(w);
+  const swapped = ["usdc", "vaultUsdc", "weth"].some((k) => Number(b[k]) < Number(w[k] ?? 0) - 1e-6);
+  const arrived = swapped ? 0 : holdings(b) - holdings(w);
   if (arrived >= 0.01) {
     const li = el("li", "arrived", `+${usd(arrived)} arrived at ${clockTime(new Date())}. Thank you!`);
     $("arrivals").prepend(li);
   }
-  Object.assign(w, b, { valueUsd: Number(b.usdc) + Number(b.vaultUsdc) + (Number(b.eth) + Number(b.weth)) * b.ethUsd });
+  Object.assign(w, b, {
+    valueUsd: Number(b.usdc) + Number(b.vaultUsdc) + (Number(b.eth) + Number(b.weth)) * b.ethUsd,
+    valueEth: Number(b.eth) + Number(b.weth) + (Number(b.usdc) + Number(b.vaultUsdc)) / b.ethUsd,
+  });
   state.updatedAt = new Date().toISOString();
   render();
   $("w-updated").replaceChildren(el("span", "live", "Live"), ` from the chain, checked ${clockTime(new Date())}`);

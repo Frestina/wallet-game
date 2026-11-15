@@ -6,15 +6,15 @@ thinking behind them.
 
 ## Quick state
 
-- **Level:** 2 "Stack ETH" in PAPER TEST (set 2026-11-14). Score in ETH; goal as much as possible, at least +3% at the deadline; 30 days from go-live. Level 1 LOST: $97.57 of $199.27 at the 2026-11-07 deadline (Base block 54306891).
-- **Bot:** `src/bot.js`, a systemd user timer (`wallet-game-bot`) every 15 min on the bot machine (name kept out of the repo; see Claude's memory). State in `~/.local/state/wallet-game/` there; logs `journalctl --user -u wallet-game-bot`. **Only the bot machine sends transactions**; sessions here only read, or run commands there over SSH.
+- **Level:** 2 "Stack ETH" LIVE since 2026-11-15 12:08 Oslo (11:08:12 UTC). Score in ETH at the Chainlink price. Start **0.051607 ETH** (anchor $1,828.50), goal at least **0.053155 ETH** (+3%) at the deadline **2026-12-15 12:08 Oslo**. Level 1 LOST: $97.57 of $199.27 at the 2026-11-07 deadline (Base block 54306891).
+- **Bot:** `src/bot.js`, LIVE (`WALLET_GAME_MODE=live` in the unit file), a systemd user timer (`wallet-game-bot`) every 15 min on the bot machine (name kept out of the repo; see Claude's memory). State in `~/.local/state/wallet-game/` there (`grid.json`, `trades.jsonl`; paper run archived as `paper-*.json*`); logs `journalctl --user -u wallet-game-bot`. **Only the bot machine sends transactions**; sessions here only read, or run commands there over SSH. To log bot trades: read `trades.jsonl` there and add each as a move.
 - **Wallet:** `0xFbE4C34cD9Bc33a83071C8380aB9Cf80dD97CdfF` (same address on Base and Base Sepolia)
 - **Key:** `~/.config/claude-game/wallet.key` (never print it, never copy it into the project)
 - **Dashboard:** live at https://frestina.github.io/wallet-game/ (GitHub Pages, main branch root). Comments on the claude.ai copy: https://claude.ai/artifact/VZH8ZuDxS5uoJPbbVaDG5B
 - **Accounts:** X @frestina87 (posting via Chromium; the Claude in Chrome browser named "Browser 1" is Chromium, checked via userAgentData), Hacker News `Frestina` (made 2026-10-08, for one Show HN), GitHub Frestina.
 - **Repo:** https://github.com/Frestina/wallet-game (public, MIT). Push session updates automatically after `node src/check-staged.js` passes.
-- **Reminder:** `node src/remind.js` sets the next /play notification (now 2026-11-15 12:00).
-- **Next:** 2026-11-15 12:00: read the paper run (journal + trades.jsonl on the bot machine). If clean, show the game master the go-live steps and wait for a yes: on the bot machine, `wallet.js vault-out all`, wrap native ETH down to 0.002 fuel, swap to 50/50 WETH/USDC, `bot.js reset` state, set WALLET_GAME_MODE=live, record the start value in ETH and the deadline. The live swap path is untested: watch the first live trade closely. Update the dashboard for an ETH score (level kind "eth").
+- **Reminder:** `node src/remind.js` sets the next /play notification (now 2026-11-17 12:00).
+- **Next:** 2026-11-17 12:00: check the bot on the bot machine (journal, `trades.jsonl`, `bot.js status`): the first live grid trades went through (tx hashes, min-out held, no halt), `trading-bot` still active. Log each live trade as a move, refresh the dashboard. Then every 2-3 days the same; nothing else to do until the 2026-12-15 12:08 deadline, when I read the score at the deadline block. X replies not checked since 11-02 (no browser connected).
 
 ## How to update the dashboard
 
@@ -379,3 +379,28 @@ thinking behind them.
   to `~/.config/claude-game/private-words` so `check-staged.js` catches it
   before the commit.
 - No money moved.
+
+### 2026-11-15: Level 2 goes live (12:00-12:20)
+- No dashboard comments, no new money. X not checked: no browser connected.
+- **Paper run result** (2026-11-14 13:04 to 11-15 12:00): 93 runs, 0 errors, no
+  skips. 6 paper trades: 4 buys as ETH fell from $1,910 to $1,744, then 2 sells
+  on the bounce to $1,839. In ETH, the paper pot went from 0.04777 to 0.04896
+  (+2.5%) vs +1.9% for just holding 50/50. Most of that is the price falling
+  while half the wallet was USDC, not the grid.
+- Added `bot.js split`: a one-time 50/50 go-live swap with the grid's guards
+  (feed age, pool drift, min-out at Chainlink minus 0.5%), dry run by default.
+- **Game master said yes to going live.** On the bot machine: paused the
+  timer, pulled, `vault-out all` (79.935 USDC, tx 0x204d…f23b), wrapped 0.0059
+  ETH (tx 0xcd44…b5f0), split 34.57 USDC into 0.018899 WETH at ~$1,829
+  (approval 0x7c5f…1a8f, swap 0x0f45…57b1; ~0.04% cost; first live router
+  swap, it worked). Archived the paper state, set the unit to live, ran once
+  (`started, anchor $1828.50`), restarted the timer. `trading-bot` still active.
+- **Start: 0.0248 WETH + 45.36 USDC + 0.002 ETH = 0.051607 ETH.** Goal
+  0.053155 ETH on 2026-12-15 12:08 Oslo.
+- Dashboard: score shown in ETH (Chainlink price, in both the snapshot and the
+  live chain read), meter from -3% to +3%, Level 2 strategy and pots. **Fix:**
+  the live "money arrived, thank you" check would have mistaken a bot swap
+  between snapshots for a tip; now it only counts when no token balance fell.
+- Honest odds of +3% at the deadline: about 1 in 3. A one-way ETH rally is the
+  main risk, since half the wallet is USDC.
+

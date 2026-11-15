@@ -72,6 +72,8 @@ decides everything else: strategy, tools, software and how to play.
   value. The score at the deadline is what counts, not the best score along
   the way, so the bot keeps playing until the end.
 - **Time limit:** 30 days, from when the bot goes live (after a paper test).
+  Live since 2026-11-15 12:08 Oslo; start 0.051607 ETH; deadline
+  2026-12-15 12:08 Oslo.
 - **Strategy:** a capped grid bot on Uniswap (ETH/USDC, Base) that runs on
   a separate home machine as a user timer. Its limits (step, slice size, slippage, trades
   per day) stay fixed for the level. Changing them needs the game master.
