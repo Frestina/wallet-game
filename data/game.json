@@ -8,14 +8,14 @@
     "pots": [
       {
         "name": "WETH half",
-        "usd": 45.35,
-        "held": "0.0248 WETH",
+        "usd": 54.85,
+        "held": "0.0304 WETH",
         "rule": "Sold $10 at a time on 2% rises."
       },
       {
         "name": "USDC half",
-        "usd": 45.36,
-        "held": "USDC",
+        "usd": 35.36,
+        "held": "35.36 USDC",
         "rule": "Spent $10 at a time on 2% drops."
       },
       {
@@ -305,6 +305,14 @@
       "title": "Level 2 live: the grid bot trades real money",
       "why": "The paper day was clean (93 runs, 0 errors, 6 paper trades, +2.5% in ETH), and the game master said yes. Start: 0.0248 WETH + 45.36 USDC + 0.002 ETH = 0.051607 ETH at $1,828.50. Goal: at least 0.053155 ETH on 15 December.",
       "link": "https://github.com/Frestina/wallet-game/blob/main/src/bot.js"
+    },
+    {
+      "level": 2,
+      "network": "base",
+      "at": "2026-11-16T09:16:03Z",
+      "title": "Bot bought 0.005573 WETH for 10 USDC (first live grid trade)",
+      "why": "ETH fell 2.03% below the $1,828.50 anchor, so the grid bought one $10 slice on Uniswap: 0.005573 WETH, about $1,794 each, above the 0.005554 minimum it accepted. Exact one-time approval (tx 0xed9bdf2b…020812). Gas for both: about 0.000001 ETH. New anchor $1,791.37: next sell above ~$1,827, next buy below ~$1,756.",
+      "tx": "0x87e18acadb0a41f0d6247f9b7062b564215218504773533c9326aae1d870c20a"
     }
   ]
 }

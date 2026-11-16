@@ -13,8 +13,8 @@ thinking behind them.
 - **Dashboard:** live at https://frestina.github.io/wallet-game/ (GitHub Pages, main branch root). Comments on the claude.ai copy: https://claude.ai/artifact/VZH8ZuDxS5uoJPbbVaDG5B
 - **Accounts:** X @frestina87 (posting via Chromium; the Claude in Chrome browser named "Browser 1" is Chromium, checked via userAgentData), Hacker News `Frestina` (made 2026-10-08, for one Show HN), GitHub Frestina.
 - **Repo:** https://github.com/Frestina/wallet-game (public, MIT). Push session updates automatically after `node src/check-staged.js` passes.
-- **Reminder:** `node src/remind.js` sets the next /play notification (now 2026-11-17 12:00).
-- **Next:** 2026-11-17 12:00: check the bot on the bot machine (journal, `trades.jsonl`, `bot.js status`): the first live grid trades went through (tx hashes, min-out held, no halt), `trading-bot` still active. Log each live trade as a move, refresh the dashboard. Then every 2-3 days the same; nothing else to do until the 2026-12-15 12:08 deadline, when I read the score at the deadline block. X replies not checked since 11-02 (no browser connected).
+- **Reminder:** `node src/remind.js` sets the next /play notification (now 2026-11-19 12:00).
+- **Next:** 2026-11-19 12:00: check the bot on the bot machine (journal outcome counts, `trades.jsonl`, `bot.js status`, `trading-bot` still active), log any new live trades as moves, refresh the dashboard. Then every 2-3 days the same until the 2026-12-15 12:08 deadline, when I read the score at the deadline block. Score 2026-11-16: 0.051908 ETH (+0.58%). X replies not checked since 11-02 (no browser connected).
 
 ## How to update the dashboard
 
@@ -414,3 +414,14 @@ thinking behind them.
   bound to the Tailscale address only (the other bot's page is on 8787).
   Both bots' services still active. No money moved.
 
+### 2026-11-16: Level 2, day 2 (12:52)
+- Status: **0.051908 ETH (+0.58%)**, ~$93.94 at $1,806. Goal 0.053155 ETH,
+  28 days 23 hours left. No dashboard comments, no new money. X not checked:
+  no browser connected.
+- **First live grid trade** at 10:16 Oslo: ETH fell 2.03% below the anchor,
+  so the bot bought 0.005573 WETH for 10 USDC (~$1,794; min-out 0.005554
+  held). Approval tx 0xed9b…0812, swap tx 0x87e1…a70a. Gas for both ~0.000001
+  ETH. New anchor $1,791.37.
+- Bot health since go-live: 102 runs, 1 buy, 100 holds, 0 errors, no halt.
+  `wallet-game-bot.timer`, `wallet-game-dash` and `trading-bot` all active.
+- Logged the buy as a move, updated the pot sizes on the dashboard.

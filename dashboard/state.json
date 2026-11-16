@@ -1,18 +1,18 @@
 {
-  "updatedAt": "2026-11-15T11:11:31.536Z",
+  "updatedAt": "2026-11-16T11:53:05.930Z",
   "wallet": {
     "address": "0xFbE4C34cD9Bc33a83071C8380aB9Cf80dD97CdfF",
     "network": "base",
     "testnet": false,
     "explorer": "https://basescan.org/address/0xFbE4C34cD9Bc33a83071C8380aB9Cf80dD97CdfF",
-    "eth": "0.001999663404074818",
-    "weth": "0.024799287532712681",
-    "usdc": "45.361583",
+    "eth": "0.001998618768082919",
+    "weth": "0.030372380925337377",
+    "usdc": "35.361583",
     "vaultUsdc": "0",
-    "ethUsd": 1825.58,
-    "valueUsd": 94.28521185118052,
-    "chainlinkUsd": 1825.33262147,
-    "valueEth": 0.05165008352842926
+    "ethUsd": 1809.295,
+    "valueUsd": 93.93027089030689,
+    "chainlinkUsd": 1809.9738,
+    "valueEth": 0.05190806868303772
   },
   "currentLevel": 2,
   "strategy": {
@@ -22,14 +22,14 @@
     "pots": [
       {
         "name": "WETH half",
-        "usd": 45.35,
-        "held": "0.0248 WETH",
+        "usd": 54.85,
+        "held": "0.0304 WETH",
         "rule": "Sold $10 at a time on 2% rises."
       },
       {
         "name": "USDC half",
-        "usd": 45.36,
-        "held": "USDC",
+        "usd": 35.36,
+        "held": "35.36 USDC",
         "rule": "Spent $10 at a time on 2% drops."
       },
       {
@@ -117,7 +117,12 @@
       "deadline": "2026-12-15T11:08:12Z",
       "startValueEth": 0.051607,
       "targetValueEth": 0.053155,
-      "startPrice": 1828.5
+      "startPrice": 1828.5,
+      "startHoldings": {
+        "eth": 0.001999663404074818,
+        "weth": 0.024799287532712683,
+        "usdc": 45.361583
+      }
     },
     {
       "id": 3,
@@ -128,6 +133,15 @@
     }
   ],
   "moves": [
+    {
+      "level": 2,
+      "network": "base",
+      "at": "2026-11-16T09:16:03Z",
+      "title": "Bot bought 0.005573 WETH for 10 USDC (first live grid trade)",
+      "why": "ETH fell 2.03% below the $1,828.50 anchor, so the grid bought one $10 slice on Uniswap: 0.005573 WETH, about $1,794 each, above the 0.005554 minimum it accepted. Exact one-time approval (tx 0xed9bdf2b…020812). Gas for both: about 0.000001 ETH. New anchor $1,791.37: next sell above ~$1,827, next buy below ~$1,756.",
+      "tx": "0x87e18acadb0a41f0d6247f9b7062b564215218504773533c9326aae1d870c20a",
+      "txUrl": "https://basescan.org/tx/0x87e18acadb0a41f0d6247f9b7062b564215218504773533c9326aae1d870c20a"
+    },
     {
       "level": 2,
       "network": "base",
