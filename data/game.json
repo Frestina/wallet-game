@@ -8,19 +8,19 @@
     "pots": [
       {
         "name": "WETH half",
-        "usd": 54.85,
-        "held": "0.0304 WETH",
+        "usd": 55.34,
+        "held": "0.0306 WETH",
         "rule": "Sold $10 at a time on 2% rises."
       },
       {
         "name": "USDC half",
-        "usd": 35.36,
-        "held": "35.36 USDC",
+        "usd": 35.33,
+        "held": "35.33 USDC",
         "rule": "Spent $10 at a time on 2% drops."
       },
       {
         "name": "Fuel",
-        "usd": 3.66,
+        "usd": 3.6,
         "held": "0.002 ETH",
         "rule": "Gas only, never traded. Bot halts below 0.0005."
       }
@@ -313,6 +313,38 @@
       "title": "Bot bought 0.005573 WETH for 10 USDC (first live grid trade)",
       "why": "ETH fell 2.03% below the $1,828.50 anchor, so the grid bought one $10 slice on Uniswap: 0.005573 WETH, about $1,794 each, above the 0.005554 minimum it accepted. Exact one-time approval (tx 0xed9bdf2b…020812). Gas for both: about 0.000001 ETH. New anchor $1,791.37: next sell above ~$1,827, next buy below ~$1,756.",
       "tx": "0x87e18acadb0a41f0d6247f9b7062b564215218504773533c9326aae1d870c20a"
+    },
+    {
+      "level": 2,
+      "network": "base",
+      "at": "2026-11-16T14:45:33Z",
+      "title": "Bot sold 0.005402 WETH for 9.98 USDC",
+      "why": "ETH rose 3.34% above the $1,791.37 anchor, so the grid sold one $10 slice: 9.983 USDC at about $1,848 (minimum 9.95 held). That closes the first round trip: bought 0.005573 WETH at ~$1,794, sold back only 0.005402, so 0.000171 WETH stays in the wallet. Approval tx 0xf6e736a6…4d8180. New anchor $1,851.28.",
+      "tx": "0x49ca46487f69175001fdb73499c6410787b474dccbcd5388fa182d922025b12d"
+    },
+    {
+      "level": 2,
+      "network": "base",
+      "at": "2026-11-16T15:16:03Z",
+      "title": "Bot bought 0.005523 WETH for 10 USDC",
+      "why": "Half an hour later ETH fell 2.16% below the $1,851.28 anchor, so the grid bought a $10 slice back: 0.005523 WETH at about $1,810.5 (minimum 0.005494 held). Approval tx 0x6490b0f9…ee94df79. New anchor $1,811.20.",
+      "tx": "0x6099b43393226490a9a1f9e3f5f31c143afb3c4f8fe12cd892173a12f7964226"
+    },
+    {
+      "level": 2,
+      "network": "base",
+      "at": "2026-11-18T14:46:03Z",
+      "title": "Bot bought 0.005691 WETH for 10 USDC",
+      "why": "ETH fell 2.68% below the $1,811.20 anchor, so the grid bought another $10 slice: 0.005691 WETH at about $1,757 (minimum 0.005645 held). Approval tx 0x2d2bc2f7…2475f2. New anchor $1,762.61.",
+      "tx": "0xd42f8235eb3e8d82dc208724175ac8f743b3d651e667b676eff5c52c672475f2"
+    },
+    {
+      "level": 2,
+      "network": "base",
+      "at": "2026-11-19T05:00:38Z",
+      "title": "Bot sold 0.005558 WETH for 9.99 USDC",
+      "why": "ETH rose 2.08% above the $1,762.61 anchor, so the grid sold a $10 slice: 9.988 USDC at about $1,797 (minimum 9.95 held). Second round trip closed: bought 0.005691 WETH at ~$1,757, sold 0.005558, so 0.000133 WETH stays. Approval tx 0xcab8b858…dcae76. New anchor $1,799.18: next sell above ~$1,835, next buy below ~$1,763.",
+      "tx": "0xeeb14c7ea5c6998c8a67f90c375fe61e801908c4281e4be00ca7e2f6f9dcae76"
     }
   ]
 }
