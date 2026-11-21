@@ -13,8 +13,8 @@ thinking behind them.
 - **Dashboard:** live at https://frestina.github.io/wallet-game/ (GitHub Pages, main branch root). Comments on the claude.ai copy: https://claude.ai/artifact/VZH8ZuDxS5uoJPbbVaDG5B
 - **Accounts:** X @frestina87 (posting via Chromium; the Claude in Chrome browser named "Browser 1" is Chromium, checked via userAgentData), Hacker News `Frestina` (made 2026-10-08, for one Show HN), GitHub Frestina.
 - **Repo:** https://github.com/Frestina/wallet-game (public, MIT). Push session updates automatically after `node src/check-staged.js` passes.
-- **Reminder:** `node src/remind.js` sets the next /play notification (now 2026-11-21 12:00).
-- **Next:** 2026-11-21 12:00: check the bot on the bot machine (journal outcome counts, `trades.jsonl`, `bot.js status`, `trading-bot` still active), log any new live trades as moves (read the real amounts from the swap receipts), refresh the dashboard. Then every 2-3 days the same until the 2026-12-15 12:08 deadline, when I read the score at the deadline block. Score 2026-11-19: 0.052168 ETH (+1.09%; just holding 50/50 would be +0.56%). X replies not checked since 11-02 (no browser connected).
+- **Reminder:** `node src/remind.js` sets the next /play notification (now 2026-11-24 12:00).
+- **Next:** 2026-11-24 12:00: check the bot on the bot machine (journal outcome counts, `trades.jsonl`, `bot.js status`, `trading-bot` still active), log any new live trades as moves (real amounts from the swap receipts), refresh the dashboard. Then every 2-3 days the same until the 2026-12-15 12:08 deadline, when I read the score at the deadline block. Score 2026-11-21: 0.053601 ETH (+3.86%, above the +3% goal; holding 50/50 would be +5.58%). The wallet is now ~94% ETH with 5.33 USDC, so the bot can't buy until it sells above ~$1,690. Risk: without more round trips, ETH above ~$1,900 at the deadline pushes the score under the goal. Open question for the game master: lock the score in now (see 11-21 entry). X replies not checked since 11-02.
 ## How to update the dashboard
 
 1. Edit `data/game.json` (moves, checklist, strategy, level status).
@@ -446,3 +446,36 @@ thinking behind them.
   `wallet-game-dash` and `trading-bot` all active.
 - Read the real swap amounts from the tx receipts (`trades.jsonl` only
   holds the minimums), logged the four trades as moves, updated pot sizes.
+
+### 2026-11-21: Level 2, day 7 (12:30)
+- Status: **0.053601 ETH (+3.86%)**, ~$87.79 at $1,638. Above the goal of
+  0.053155 ETH (+3%), with 23 days 23 hours left. No dashboard comments, no
+  new money. X not checked: no browser connected.
+- **Five new live trades** while ETH fell from ~$1,800 to ~$1,640:
+  - 11-19 18:15 Oslo buy 0.005702 WETH for 10 USDC (~$1,754), tx 0xa5f0…f8bf1
+  - 11-19 19:30 sell 0.005601 WETH for 9.997 USDC (~$1,785), tx 0x82cc…f158
+  - 11-19 22:30 buy 0.005739 WETH for 10 USDC (~$1,742), tx 0x422a…cfc8
+  - 11-20 16:16 buy 0.005852 WETH for 10 USDC (~$1,709), tx 0x5ea8…a94c
+  - 11-20 16:46 buy 0.006043 WETH for 10 USDC (~$1,655), tx 0x7d37…8784d
+  Each had its own exact approval first. All 10 tx succeeded; gas ~0.000009
+  ETH in total.
+- **Grid so far:** three round trips closed, keeping 0.000405 WETH in all.
+  Four bought slices are open (~$1,810, $1,742, $1,709, $1,655). Only 5.33
+  USDC is left, under one $10 slice, so since 11-20 18:46 the bot logs
+  `skip: no USDC left to buy with` on every run (48 so far). That's the
+  designed behaviour, not a fault: it waits for a 2% rise to sell.
+- **Honest read:** the score is above the goal mainly because ETH fell while
+  part of the wallet was USDC. Just holding the 50/50 start would now be
+  0.054485 ETH (+5.58%), so the grid is 1.7 points behind holding; it bought
+  ETH all the way down and only catches up if ETH bounces. With the wallet
+  ~94% ETH, the score barely moves with the price now: about 0.05035 ETH +
+  5.33 USDC. Without more round trips, it stays above +3% as long as ETH is
+  under ~$1,900 at the deadline.
+- **Option for the game master (not done; the limits are fixed for the
+  level):** lock the win in by swapping the last 5.33 USDC to WETH and
+  stopping the bot, which fixes the score at ~0.0536 ETH (+3.8%) whatever
+  ETH does. The cost is giving up any further grid gains in choppy markets.
+- Bot health since 11-19 12:40: 190 runs, 137 holds, 4 buys, 1 sell, 48
+  skips (all no-USDC), 0 errors, no halt. Anchor $1,657.16.
+  `wallet-game-bot.timer`, `wallet-game-dash` and `trading-bot` all active.
+- Logged the five trades as moves, updated pot sizes.
