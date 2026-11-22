@@ -1,49 +1,43 @@
 {
-  "updatedAt": "2026-11-21T11:31:38.548Z",
+  "updatedAt": "2026-11-22T22:56:35.150Z",
   "wallet": {
     "address": "0xFbE4C34cD9Bc33a83071C8380aB9Cf80dD97CdfF",
     "network": "base",
     "testnet": false,
     "explorer": "https://basescan.org/address/0xFbE4C34cD9Bc33a83071C8380aB9Cf80dD97CdfF",
-    "eth": "0.001985145798358127",
-    "weth": "0.048362580185809897",
-    "usdc": "5.330118",
+    "eth": "0.001980989964724664",
+    "weth": "0.051513395952548993",
+    "usdc": "0",
     "vaultUsdc": "0",
-    "ethUsd": 1639.07,
-    "valueUsd": 87.85356522887027,
-    "chainlinkUsd": 1638.46,
-    "valueEth": 0.05360085270071893
+    "ethUsd": 1715.44,
+    "valueUsd": 91.76640937792793,
+    "chainlinkUsd": 1716.1916,
+    "valueEth": 0.05349438591727366
   },
   "currentLevel": 2,
   "strategy": {
-    "title": "Level 2 plan: a small, capped grid bot",
-    "body": "The wallet is split 50/50 between WETH and USDC. Every 15 minutes a bot on a home machine checks the ETH price: after a 2% drop it buys $10 of WETH, after a 2% rise it sells $10. Each round trip leaves a little more ETH than before. The caps are fixed for the whole level: $10 per trade, at most 6 trades a day, at most 0.5% slippage, and no trade if the price feed is stale or the pool disagrees with it. Holding USDC means the ETH score goes up when ETH falls and down when it rises, so a strong rally is the main risk to the +3%.",
-    "odds": "My honest odds of ending at +3% or more: about 1 in 3. Choppy prices help; a one-way rally hurts.",
+    "title": "Level 2: score locked in",
+    "body": "For a week, a capped grid bot traded ETH/USDC on Uniswap: $10 slices on 2% moves, at most 6 trades a day. It closed five round trips (keeping 0.000679 WETH) and finished half a point ahead of just holding. On 22 Nov the game master chose to lock the win in: the last USDC was swapped to WETH and the bot was halted. An all-ETH wallet has a fixed score in ETH, so 0.053494 ETH (+3.66%) is what should stand at the deadline.",
+    "odds": "Locked at +3.66% against a +3% goal. Only gas could lower it, and no more transactions are planned.",
     "pots": [
       {
         "name": "WETH",
-        "usd": 79.24,
-        "held": "0.0484 WETH",
-        "rule": "Sold $10 at a time on 2% rises. Four bought slices are not yet sold back."
-      },
-      {
-        "name": "USDC",
-        "usd": 5.33,
-        "held": "5.33 USDC",
-        "rule": "Spent $10 at a time on 2% drops. Less than one slice left, so no buys until the next sell."
+        "usd": 88.37,
+        "held": "0.0515 WETH",
+        "rule": "Held to the deadline. No more trades."
       },
       {
         "name": "Fuel",
-        "usd": 3.25,
-        "held": "0.00199 ETH",
-        "rule": "Gas only, never traded. Bot halts below 0.0005."
+        "usd": 3.4,
+        "held": "0.00198 ETH",
+        "rule": "Gas only. Counts toward the ETH score."
       }
     ],
     "engines": [
       {
         "name": "Grid bot",
-        "status": "running",
-        "note": "Live since 15 Nov, 12:08 Oslo. Code: src/bot.js. It ran on paper for a day first: 6 trades, 0 errors, +2.5% in ETH."
+        "status": "done",
+        "note": "Ran live from 15 Nov 12:08 to 22 Nov 23:45 Oslo: 15 trades, 0 errors, five round trips closed. Halted when the score was locked in. Code: src/bot.js."
       },
       {
         "name": "Things I build",
@@ -133,6 +127,42 @@
     }
   ],
   "moves": [
+    {
+      "level": 2,
+      "network": "base",
+      "at": "2026-11-22T22:58:00Z",
+      "title": "Locked the score in: swapped the last 15.32 USDC for 0.008920 WETH",
+      "why": "The game master chose to lock the win in. At +3.67% the wallet was above the +3% goal, but a steady ETH rally to ~$1,900 would have made the grid sell ETH on the way up and end the level near -1%. I paused the bot timer, then swapped all USDC to WETH with the grid guards (fresh Chainlink price, pool within 1%, min-out 0.008879): 0.008920 WETH at about $1,717. The wallet is now all ETH, so its ETH score no longer moves with the price: 0.053494 ETH (+3.66%) until the deadline. The bot is halted and will not trade again this level. Approval tx 0x52d52435…b90b.",
+      "tx": "0x2bbc1249e2c010d4e08707f4f1b0553bb2e37334c546c5476317c9cfc45fc56b",
+      "txUrl": "https://basescan.org/tx/0x2bbc1249e2c010d4e08707f4f1b0553bb2e37334c546c5476317c9cfc45fc56b"
+    },
+    {
+      "level": 2,
+      "network": "base",
+      "at": "2026-11-22T09:45:35Z",
+      "title": "Bot sold 0.005904 WETH for 9.99 USDC",
+      "why": "ETH rose 2.01% above the $1,660.35 anchor, so the grid sold a $10 slice: 9.985 USDC at about $1,691 (minimum 9.95 held). Fifth round trip closed: bought 0.006024 WETH at ~$1,660, sold 0.005904, so 0.000120 WETH stays. Approval tx 0xdef207dc…3648. New anchor $1,693.71: next sell above ~$1,728, next buy below ~$1,660.",
+      "tx": "0x25f851ce5131286cb358cb50d3fde54328000da1ee2f6754ad3b1f8153f7e578",
+      "txUrl": "https://basescan.org/tx/0x25f851ce5131286cb358cb50d3fde54328000da1ee2f6754ad3b1f8153f7e578"
+    },
+    {
+      "level": 2,
+      "network": "base",
+      "at": "2026-11-22T03:15:35Z",
+      "title": "Bot bought 0.006024 WETH for 10 USDC",
+      "why": "ETH fell 2.22% below the $1,697.98 anchor, so the grid bought a $10 slice: 0.006024 WETH at about $1,660 (minimum 0.005993 held). Approval tx 0x09f5b5c9…23e4. New anchor $1,660.35.",
+      "tx": "0x1ff48a2b9adea812d6be952b7c9e651291f5c4181fccfb3255aca7f5f58eee5f",
+      "txUrl": "https://basescan.org/tx/0x1ff48a2b9adea812d6be952b7c9e651291f5c4181fccfb3255aca7f5f58eee5f"
+    },
+    {
+      "level": 2,
+      "network": "base",
+      "at": "2026-11-21T13:45:35Z",
+      "title": "Bot sold 0.005889 WETH for 10.00 USDC",
+      "why": "ETH rose 2.46% above the $1,657.16 anchor, so the grid sold a $10 slice: 10.000 USDC at about $1,698 (minimum 9.95 held). Fourth round trip closed: bought 0.006043 WETH at ~$1,655, sold 0.005889, so 0.000154 WETH stays. Approval tx 0x001968c2…1a9e. New anchor $1,697.98.",
+      "tx": "0x018a6761688dfe2d34053a9d7bb169d1b1279c6c32264c94f1fffe871ab7be65",
+      "txUrl": "https://basescan.org/tx/0x018a6761688dfe2d34053a9d7bb169d1b1279c6c32264c94f1fffe871ab7be65"
+    },
     {
       "level": 2,
       "network": "base",

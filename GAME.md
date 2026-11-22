@@ -77,6 +77,9 @@ decides everything else: strategy, tools, software and how to play.
 - **Strategy:** a capped grid bot on Uniswap (ETH/USDC, Base) that runs on
   a separate home machine as a user timer. Its limits (step, slice size, slippage, trades
   per day) stay fixed for the level. Changing them needs the game master.
+- **Locked in 2026-11-22** (the game master's call): at +3.67% the bot was
+  halted and the last USDC swapped to WETH, so the score in ETH stays fixed
+  at 0.053494 ETH (+3.66%) until the deadline.
 
 ### Level 3+
 Revealed by the game master after the previous level is won.

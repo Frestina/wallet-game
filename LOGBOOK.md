@@ -7,14 +7,14 @@ thinking behind them.
 ## Quick state
 
 - **Level:** 2 "Stack ETH" LIVE since 2026-11-15 12:08 Oslo (11:08:12 UTC). Score in ETH at the Chainlink price. Start **0.051607 ETH** (anchor $1,828.50), goal at least **0.053155 ETH** (+3%) at the deadline **2026-12-15 12:08 Oslo**. Level 1 LOST: $97.57 of $199.27 at the 2026-11-07 deadline (Base block 54306891).
-- **Bot:** `src/bot.js`, LIVE (`WALLET_GAME_MODE=live` in the unit file), a systemd user timer (`wallet-game-bot`) every 15 min on the bot machine (name kept out of the repo; see Claude's memory). State in `~/.local/state/wallet-game/` there (`grid.json`, `trades.jsonl`; paper run archived as `paper-*.json*`); logs `journalctl --user -u wallet-game-bot`. **Only the bot machine sends transactions**; sessions here only read, or run commands there over SSH. To log bot trades: read `trades.jsonl` there and add each as a move. **Status page:** `src/bot-dash.js` as user service `wallet-game-dash`, read-only, on the bot machine's Tailscale address, port 8788 (the address stays out of the repo; it's in the installed unit).
+- **Bot:** `src/bot.js`, **HALTED and timer disabled since 2026-11-22 23:58 Oslo** (score locked in, game master's call; `bot.js status` shows `halted: locked in…`, don't `reset` it). Ran live as systemd user timer `wallet-game-bot` on the bot machine (name kept out of the repo; see Claude's memory). State in `~/.local/state/wallet-game/` there (`grid.json`, `trades.jsonl`); logs `journalctl --user -u wallet-game-bot`. **Only the bot machine sends transactions.** **Status page:** `src/bot-dash.js` as user service `wallet-game-dash`, still running, read-only, Tailscale address, port 8788.
 - **Wallet:** `0xFbE4C34cD9Bc33a83071C8380aB9Cf80dD97CdfF` (same address on Base and Base Sepolia)
 - **Key:** `~/.config/claude-game/wallet.key` (never print it, never copy it into the project)
 - **Dashboard:** live at https://frestina.github.io/wallet-game/ (GitHub Pages, main branch root). Comments on the claude.ai copy: https://claude.ai/artifact/VZH8ZuDxS5uoJPbbVaDG5B
 - **Accounts:** X @frestina87 (posting via Chromium; the Claude in Chrome browser named "Browser 1" is Chromium, checked via userAgentData), Hacker News `Frestina` (made 2026-10-08, for one Show HN), GitHub Frestina.
 - **Repo:** https://github.com/Frestina/wallet-game (public, MIT). Push session updates automatically after `node src/check-staged.js` passes.
-- **Reminder:** `node src/remind.js` sets the next /play notification (now 2026-11-24 12:00).
-- **Next:** 2026-11-24 12:00: check the bot on the bot machine (journal outcome counts, `trades.jsonl`, `bot.js status`, `trading-bot` still active), log any new live trades as moves (real amounts from the swap receipts), refresh the dashboard. Then every 2-3 days the same until the 2026-12-15 12:08 deadline, when I read the score at the deadline block. Score 2026-11-21: 0.053601 ETH (+3.86%, above the +3% goal; holding 50/50 would be +5.58%). The wallet is now ~94% ETH with 5.33 USDC, so the bot can't buy until it sells above ~$1,690. Risk: without more round trips, ETH above ~$1,900 at the deadline pushes the score under the goal. Open question for the game master: lock the score in now (see 11-21 entry). X replies not checked since 11-02.
+- **Reminder:** `node src/remind.js` sets the next /play notification (now 2026-11-25 12:00).
+- **Next:** 2026-11-25 12:00: light check only: balance unchanged (0.051513 WETH + 0.001981 ETH, 0 USDC; nonce unchanged), bot timer still disabled and halted, no comments or new money; republish if anything changed. Then every 3 days the same until the 2026-12-15 12:08 Oslo deadline, when I read the score at the deadline block and close Level 2. Locked score 0.053494 ETH (+3.66%; goal 0.053155). X replies not checked since 11-02.
 ## How to update the dashboard
 
 1. Edit `data/game.json` (moves, checklist, strategy, level status).
@@ -479,3 +479,25 @@ thinking behind them.
   skips (all no-USDC), 0 errors, no halt. Anchor $1,657.16.
   `wallet-game-bot.timer`, `wallet-game-dash` and `trading-bot` all active.
 - Logged the five trades as moves, updated pot sizes.
+
+### 2026-11-22: Level 2, day 8 (23:50), score locked in
+- Status before: **0.053500 ETH (+3.67%)**, ~$91.78 at $1,716. No dashboard
+  comments, no new money. X not checked: no browser connected.
+- **Three new live trades**, two more round trips closed:
+  - 11-21 14:45 Oslo sell 0.005889 WETH for 10.000 USDC (~$1,698), tx 0x018a…be65
+  - 11-22 04:15 buy 0.006024 WETH for 10 USDC (~$1,660), tx 0x1ff4…ee5f
+  - 11-22 10:45 sell 0.005904 WETH for 9.985 USDC (~$1,691), tx 0x25f8…e578
+  All 6 tx succeeded. Five round trips in all, keeping 0.000679 WETH.
+  Holding the 50/50 start would have been 0.053231 ETH (+3.15%), so the grid
+  ended half a point ahead. Bot health: 142 runs, 0 errors.
+- **Game master chose to lock the win in.** The risk I raised: a steady
+  rally to ~$1,900 would make the grid sell ETH all the way up and end near
+  -1%. Steps on the bot machine: stopped and disabled the timer; added
+  `bot.js lockin` (all USDC to WETH with the grid's guards, then sets
+  `halted`), pushed, pulled, dry run, then sent. Approval 0x52d5…b90b, swap
+  0x2bbc…c56b: 15.315393 USDC for 0.008920 WETH (~$1,717, min-out 0.008879).
+- **Locked: 0.051513 WETH + 0.001981 ETH = 0.053494 ETH (+3.66%)**, goal
+  0.053155. An all-ETH wallet has a fixed ETH score, so this should stand at
+  the deadline. No more transactions are planned. `trading-bot` still active.
+- Note: the status page now shows a "Halted" banner that suggests
+  `bot.js reset`. Don't: reset plus a timer restart would let it trade again.
