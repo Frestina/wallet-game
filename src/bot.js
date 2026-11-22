@@ -130,6 +130,25 @@ async function split(send) {
   if (!send) console.log("dry run: add --send to swap");
 }
 
+// Lock the score in (game master's call, 2026-11-22): swap all USDC to WETH with the grid's guards,
+// then halt the bot so it never trades again this level. An all-ETH wallet has a fixed ETH score.
+async function lockin(send) {
+  const account = privateKeyToAccount(readFileSync(KEY_FILE, "utf8").trim());
+  const { pub, wallet } = clients(net);
+  const m = await readMarket(pub, account.address);
+  if (m.feedAgeSec > LIMITS.maxFeedAgeSec) throw new Error(`Chainlink price is ${m.feedAgeSec}s old`);
+  const drift = Math.abs(m.poolPrice / m.price - 1) * 100;
+  if (drift > LIMITS.maxPoolDriftPct) throw new Error(`pool and Chainlink differ ${drift.toFixed(2)}%`);
+  const usdc = Number(formatUnits(m.usdc, 6));
+  const minOut = parseEther(((usdc / m.price) * (1 - LIMITS.maxSlippagePct / 100)).toFixed(18));
+  console.log(`price $${m.price.toFixed(2)} (pool drift ${drift.toFixed(2)}%), lock in: ${usdc.toFixed(6)} USDC -> at least ${formatEther(minOut)} WETH`);
+  if (!send) return console.log("dry run: add --send to swap and halt");
+  if (m.usdc > 0n) console.log("tx", (await swapLive(pub, wallet(account), account, "buy", m.usdc, minOut)).join(" "));
+  const s = readState();
+  if (s) { s.halted = "locked in: all USDC swapped to WETH, game master's call"; writeState(s); }
+  console.log("halted");
+}
+
 async function run() {
   const account = privateKeyToAccount(readFileSync(KEY_FILE, "utf8").trim());
   const { pub, wallet } = clients(net);
@@ -224,5 +243,6 @@ const cmd = isMain ? process.argv[2] : "imported";
 if (cmd === "imported") { /* used as a library */ }
 else if (cmd === "status") console.log(JSON.stringify(readState(), null, 2));
 else if (cmd === "reset") { const s = readState(); if (s) { s.halted = null; s.errors = 0; writeState(s); } console.log("cleared"); }
+else if (cmd === "lockin") lockin(process.argv[3] === "--send").catch((e) => { console.error(`lockin failed: ${e.shortMessage ?? e.message}`); process.exit(1); });
 else if (cmd === "split") split(process.argv[3] === "--send").catch((e) => { console.error(`split failed: ${e.shortMessage ?? e.message}`); process.exit(1); });
 else run().catch((e) => { log(`fatal: ${e.shortMessage ?? e.message}`); process.exit(1); });
