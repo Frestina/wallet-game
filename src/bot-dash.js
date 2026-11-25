@@ -71,7 +71,7 @@ async function page() {
   let overview = `<p class="banner">Chain not readable right now${err ? `: ${esc(err)}` : ""}.</p>`;
   let grid = "";
   if (m) {
-    const e = Number(formatEther(m.eth)), w = Number(formatEther(m.weth)), u = Number(formatUnits(m.usdc, 6)), v = Number(formatUnits(m.vault, 6));
+    const e = Number(formatEther(m.eth)), w = Number(formatEther(m.weth)) + Number(formatEther(m.vaultWeth ?? 0n)), u = Number(formatUnits(m.usdc, 6)), v = Number(formatUnits(m.vault, 6));
     const score = e + w + (u + v) / m.price;
     const sh = lvl?.startHoldings;
     const bench = sh ? sh.eth + sh.weth + sh.usdc / m.price : null;

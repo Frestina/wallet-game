@@ -215,6 +215,7 @@ footer { color: var(--muted); font-size: 13px; padding-block: 0 40px; }
             <div><dt>WETH</dt><dd id="w-weth">–</dd></div>
             <div><dt>USDC</dt><dd id="w-usdc">–</dd></div>
             <div><dt>USDC in vault (Aave)</dt><dd id="w-vault">–</dd></div>
+            <div><dt>WETH in vault (Aave)</dt><dd id="w-vault-weth">–</dd></div>
             <div><dt>ETH price</dt><dd id="w-price">–</dd></div>
           </dl>
           <div class="addr">
@@ -394,6 +395,7 @@ function render() {
   $("w-weth").textContent = trim(w.weth ?? 0);
   $("w-usdc").textContent = trim(w.usdc, 2);
   $("w-vault").textContent = trim(w.vaultUsdc ?? 0, 2);
+  $("w-vault-weth").textContent = trim(w.vaultWeth ?? 0);
   $("tip-addr").textContent = w.address;
   $("tip").hidden = w.testnet;
   $("w-price").textContent = usd(w.ethUsd);
@@ -433,6 +435,7 @@ const CHAIN = {
   usdc: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
   weth: "0x4200000000000000000000000000000000000006",
   aUsdc: "0x4e65fE4DbA92790696d040ac24Aa414708F5c0AB",
+  aWeth: "0xD4a0e0b9149BCee3C920d2E00b5dE09138fd8bb7", // Aave aBasWETH, 1:1 with WETH
   ethUsdFeed: "0x71041dddad3595F9CEd3DcCFBe3D1F4b0a16Bb70", // Chainlink ETH / USD on Base
 };
 const units = (hex, dec) => {
@@ -448,6 +451,7 @@ async function readChain(address) {
     ["eth_call", [balanceOf(CHAIN.usdc), "latest"]],
     ["eth_call", [balanceOf(CHAIN.weth), "latest"]],
     ["eth_call", [balanceOf(CHAIN.aUsdc), "latest"]],
+    ["eth_call", [balanceOf(CHAIN.aWeth), "latest"]],
     ["eth_call", [{ to: CHAIN.ethUsdFeed, data: "0xfeaf968c" }, "latest"]], // latestRoundData()
   ];
   const body = JSON.stringify(calls.map(([method, params], id) => ({ jsonrpc: "2.0", id, method, params })));
@@ -459,8 +463,8 @@ async function readChain(address) {
       const out = await res.json();
       const r = (id) => { const x = out.find((o) => o.id === id); if (!x || x.error || !x.result) throw new Error("rpc"); return x.result; };
       return {
-        eth: units(r(0), 18), usdc: units(r(1), 6), weth: units(r(2), 18), vaultUsdc: units(r(3), 6),
-        ethUsd: Number(BigInt("0x" + r(4).slice(2 + 64, 2 + 128))) / 1e8,
+        eth: units(r(0), 18), usdc: units(r(1), 6), weth: units(r(2), 18), vaultUsdc: units(r(3), 6), vaultWeth: units(r(4), 18),
+        ethUsd: Number(BigInt("0x" + r(5).slice(2 + 64, 2 + 128))) / 1e8,
       };
     } catch (e) { lastErr = e; }
   }
@@ -474,16 +478,16 @@ async function refreshLive() {
   const b = await readChain(w.address);
   // Money that arrived: growth in holdings at today's price, so price moves don't count. A bot
   // swap lowers one token while raising another, so if any token went down, it's not a tip.
-  const holdings = (x) => Number(x.usdc) + Number(x.vaultUsdc ?? 0) + (Number(x.eth) + Number(x.weth ?? 0)) * b.ethUsd;
-  const swapped = ["usdc", "vaultUsdc", "weth"].some((k) => Number(b[k]) < Number(w[k] ?? 0) - 1e-6);
+  const holdings = (x) => Number(x.usdc) + Number(x.vaultUsdc ?? 0) + (Number(x.eth) + Number(x.weth ?? 0) + Number(x.vaultWeth ?? 0)) * b.ethUsd;
+  const swapped = ["usdc", "vaultUsdc", "weth", "vaultWeth"].some((k) => Number(b[k]) < Number(w[k] ?? 0) - 1e-6);
   const arrived = swapped ? 0 : holdings(b) - holdings(w);
   if (arrived >= 0.01) {
     const li = el("li", "arrived", `+${usd(arrived)} arrived at ${clockTime(new Date())}. Thank you!`);
     $("arrivals").prepend(li);
   }
   Object.assign(w, b, {
-    valueUsd: Number(b.usdc) + Number(b.vaultUsdc) + (Number(b.eth) + Number(b.weth)) * b.ethUsd,
-    valueEth: Number(b.eth) + Number(b.weth) + (Number(b.usdc) + Number(b.vaultUsdc)) / b.ethUsd,
+    valueUsd: Number(b.usdc) + Number(b.vaultUsdc) + (Number(b.eth) + Number(b.weth) + Number(b.vaultWeth)) * b.ethUsd,
+    valueEth: Number(b.eth) + Number(b.weth) + Number(b.vaultWeth) + (Number(b.usdc) + Number(b.vaultUsdc)) / b.ethUsd,
   });
   state.updatedAt = new Date().toISOString();
   render();

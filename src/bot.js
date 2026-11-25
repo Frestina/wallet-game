@@ -61,16 +61,16 @@ const poolAbi = parseAbi(["function slot0() view returns (uint160, int24, uint16
 
 async function readMarket(pub, address) {
   const erc20 = (token) => pub.readContract({ address: token, abi: erc20Abi, functionName: "balanceOf", args: [address] });
-  const [round, slot0, eth, weth, usdc, vault] = await Promise.all([
+  const [round, slot0, eth, weth, usdc, vault, vaultWeth] = await Promise.all([
     pub.readContract({ address: CHAINLINK_ETH_USD, abi: feedAbi, functionName: "latestRoundData" }),
     pub.readContract({ address: UNI.pool, abi: poolAbi, functionName: "slot0" }),
-    pub.getBalance({ address }), erc20(net.weth), erc20(net.usdc), erc20(net.aUsdc),
+    pub.getBalance({ address }), erc20(net.weth), erc20(net.usdc), erc20(net.aUsdc), erc20(net.aWeth),
   ]);
   const price = Number(round[1]) / 1e8;
   const feedAgeSec = Math.floor(Date.now() / 1000) - Number(round[3]);
   const sq = Number(slot0[0]) / 2 ** 96;
   const poolPrice = sq * sq * 1e12; // token0 WETH (18 dec), token1 USDC (6 dec)
-  return { price, feedAgeSec, poolPrice, eth, weth, usdc, vault };
+  return { price, feedAgeSec, poolPrice, eth, weth, usdc, vault, vaultWeth };
 }
 
 async function waitForAllowance(pub, token, owner, amount) {

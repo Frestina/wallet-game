@@ -23,8 +23,10 @@ const chainlinkUsd = net.testnet ? null : await clients(net).pub.readContract({
   address: CHAINLINK_ETH_USD, functionName: "latestRoundData",
   abi: [{ type: "function", name: "latestRoundData", stateMutability: "view", inputs: [], outputs: [{ type: "uint80" }, { type: "int256" }, { type: "uint256" }, { type: "uint256" }, { type: "uint80" }] }],
 }).then((r) => Number(r[1]) / 1e8).catch(() => null);
-const valueEth = chainlinkUsd == null ? null : Number(bal.eth) + Number(bal.weth) + (Number(bal.usdc) + Number(bal.vaultUsdc)) / chainlinkUsd;
-const valueUsd = ethUsd == null ? null : Number(bal.usdc) + Number(bal.vaultUsdc) + (Number(bal.eth) + Number(bal.weth)) * ethUsd;
+// WETH lent on Aave (aWETH) is redeemable 1:1 for WETH, so it counts as ETH.
+const ethLike = Number(bal.eth) + Number(bal.weth) + Number(bal.vaultWeth);
+const valueEth = chainlinkUsd == null ? null : ethLike + (Number(bal.usdc) + Number(bal.vaultUsdc)) / chainlinkUsd;
+const valueUsd = ethUsd == null ? null : Number(bal.usdc) + Number(bal.vaultUsdc) + ethLike * ethUsd;
 
 const state = {
   updatedAt: new Date().toISOString(),
@@ -37,6 +39,7 @@ const state = {
     weth: bal.weth,
     usdc: bal.usdc,
     vaultUsdc: bal.vaultUsdc,
+    vaultWeth: bal.vaultWeth,
     ethUsd,
     valueUsd,
     chainlinkUsd,

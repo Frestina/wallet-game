@@ -5,8 +5,8 @@
 //   balance                  print ETH and USDC balances
 //   send <to> <amount> <eth|usdc>   send funds
 //   wrap <amount>            wrap ETH into WETH
-//   vault-in <amount|all>    lend USDC on Aave
-//   vault-out <amount|all>   withdraw USDC from Aave
+//   vault-in <amount|all> [usdc|weth]    lend USDC (default) or WETH on Aave
+//   vault-out <amount|all> [usdc|weth]   withdraw it again
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { join } from "node:path";
@@ -45,10 +45,10 @@ export function clients(net) {
 export async function balances(net, address) {
   const { pub } = clients(net);
   const erc20 = (token) => pub.readContract({ address: token, abi: erc20Abi, functionName: "balanceOf", args: [address] });
-  const [eth, weth, usdc, aUsdc] = await Promise.all([
-    pub.getBalance({ address }), erc20(net.weth), erc20(net.usdc), net.aUsdc ? erc20(net.aUsdc) : 0n,
+  const [eth, weth, usdc, aUsdc, aWeth] = await Promise.all([
+    pub.getBalance({ address }), erc20(net.weth), erc20(net.usdc), net.aUsdc ? erc20(net.aUsdc) : 0n, net.aWeth ? erc20(net.aWeth) : 0n,
   ]);
-  return { eth: formatEther(eth), weth: formatEther(weth), usdc: formatUnits(usdc, 6), vaultUsdc: formatUnits(aUsdc, 6) };
+  return { eth: formatEther(eth), weth: formatEther(weth), usdc: formatUnits(usdc, 6), vaultUsdc: formatUnits(aUsdc, 6), vaultWeth: formatEther(aWeth) };
 }
 
 async function main() {
@@ -102,8 +102,9 @@ async function main() {
     case "vault-in":
     case "vault-out": {
       if (!net.aavePool) throw new Error(`No Aave pool configured for ${network}`);
-      const [amount] = rest;
-      if (!amount) throw new Error(`Usage: ${cmd} <amount|all>`);
+      const [amount, asset = "usdc"] = rest;
+      if (!amount || !["usdc", "weth"].includes(asset)) throw new Error(`Usage: ${cmd} <amount|all> [usdc|weth]`);
+      const token = asset === "weth" ? net.weth : net.usdc, dec = asset === "weth" ? 18 : 6;
       const account = loadAccount();
       const { pub, wallet } = clients(net);
       const w = wallet(account);
@@ -114,28 +115,28 @@ async function main() {
       const hashes = [];
       if (cmd === "vault-in") {
         const value = amount === "all"
-          ? await pub.readContract({ address: net.usdc, abi: erc20Abi, functionName: "balanceOf", args: [account.address] })
-          : parseUnits(amount, 6);
+          ? await pub.readContract({ address: token, abi: erc20Abi, functionName: "balanceOf", args: [account.address] })
+          : parseUnits(amount, dec);
         // Approve exactly this amount, never an unlimited allowance.
-        const allowance = () => pub.readContract({ address: net.usdc, abi: erc20Abi, functionName: "allowance", args: [account.address, net.aavePool] });
+        const allowance = () => pub.readContract({ address: token, abi: erc20Abi, functionName: "allowance", args: [account.address, net.aavePool] });
         if ((await allowance()) < value) {
-          const approve = await w.writeContract({ address: net.usdc, abi: erc20Abi, functionName: "approve", args: [net.aavePool, value] });
+          const approve = await w.writeContract({ address: token, abi: erc20Abi, functionName: "approve", args: [net.aavePool, value] });
           await pub.waitForTransactionReceipt({ hash: approve });
           hashes.push(approve);
           // The public RPC is load-balanced; wait until the node we hit sees the approval.
           for (let i = 0; i < 15 && (await allowance()) < value; i++) await new Promise((r) => setTimeout(r, 1000));
         }
-        hashes.push(await w.writeContract({ address: net.aavePool, abi: poolAbi, functionName: "supply", args: [net.usdc, value, account.address, 0] }));
+        hashes.push(await w.writeContract({ address: net.aavePool, abi: poolAbi, functionName: "supply", args: [token, value, account.address, 0] }));
       } else {
-        const value = amount === "all" ? maxUint256 : parseUnits(amount, 6);
-        hashes.push(await w.writeContract({ address: net.aavePool, abi: poolAbi, functionName: "withdraw", args: [net.usdc, value, account.address] }));
+        const value = amount === "all" ? maxUint256 : parseUnits(amount, dec);
+        hashes.push(await w.writeContract({ address: net.aavePool, abi: poolAbi, functionName: "withdraw", args: [token, value, account.address] }));
       }
       const receipt = await pub.waitForTransactionReceipt({ hash: hashes.at(-1) });
       console.log(JSON.stringify({ status: receipt.status, hashes, urls: hashes.map((h) => `${net.explorer}/tx/${h}`) }, null, 2));
       break;
     }
     default:
-      console.log("Commands: new | address | balance | send <to> <amount> <eth|usdc> | wrap <amount> | vault-in <amount|all> | vault-out <amount|all>   [--network base-sepolia|base]");
+      console.log("Commands: new | address | balance | send <to> <amount> <eth|usdc> | wrap <amount> | vault-in <amount|all> [usdc|weth] | vault-out <amount|all> [usdc|weth]   [--network base-sepolia|base]");
   }
 }
 

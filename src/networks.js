@@ -18,6 +18,8 @@ export const networks = {
     // Aave v3 on Base, verified on-chain via PoolAddressesProvider 0xe20fCBdBfFC4Dd138cE8b2E6FBb6CB49777ad64D
     aavePool: "0xA238Dd80C259a72e81d7e4664a9801593F98d1c5",
     aUsdc: "0x4e65fE4DbA92790696d040ac24Aa414708F5c0AB",
+    // aBasWETH: Pool.getReserveData(WETH).aTokenAddress; its UNDERLYING_ASSET_ADDRESS() is WETH and POOL() is aavePool (checked 2026-11-25)
+    aWeth: "0xD4a0e0b9149BCee3C920d2E00b5dE09138fd8bb7",
     testnet: false,
   },
 };
