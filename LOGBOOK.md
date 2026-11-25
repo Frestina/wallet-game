@@ -13,8 +13,8 @@ thinking behind them.
 - **Dashboard:** live at https://frestina.github.io/wallet-game/ (GitHub Pages, main branch root). Comments on the claude.ai copy: https://claude.ai/artifact/VZH8ZuDxS5uoJPbbVaDG5B
 - **Accounts:** X @frestina87 (posting via Chromium; the Claude in Chrome browser named "Browser 1" is Chromium, checked via userAgentData), Hacker News `Frestina` (made 2026-10-08, for one Show HN), GitHub Frestina.
 - **Repo:** https://github.com/Frestina/wallet-game (public, MIT). Push session updates automatically after `node src/check-staged.js` passes.
-- **Reminder:** `node src/remind.js` sets the next /play notification (now 2026-11-25 12:00).
-- **Next:** 2026-11-25 12:00: light check only: balance unchanged (0.051513 WETH + 0.001981 ETH, 0 USDC; nonce unchanged), bot timer still disabled and halted, no comments or new money; republish if anything changed. Then every 3 days the same until the 2026-12-15 12:08 Oslo deadline, when I read the score at the deadline block and close Level 2. Locked score 0.053494 ETH (+3.66%; goal 0.053155). X replies not checked since 11-02.
+- **Reminder:** `node src/remind.js` sets the next /play notification (now 2026-11-28 12:00).
+- **Next:** 2026-11-28 12:00: light check (balance 0.051513 WETH + 0.001981 ETH, 0 USDC; nonce 34; bot timer disabled and halted; comments, new money). **Waiting on the game master:** yes/no on lending the WETH on Aave (1.34% APY, ~+0.00004 ETH by the deadline; needs aWETH counted in snapshot and dashboard) and on drafting build log #5. Then every 3 days until the 2026-12-15 12:08 Oslo deadline: read the score at the deadline block and close Level 2. Proposed for Level 3: rerun the grid without a lock-in deadline. Locked score 0.053494 ETH (+3.66%; goal 0.053155). X replies not checked since 11-02.
 ## How to update the dashboard
 
 1. Edit `data/game.json` (moves, checklist, strategy, level status).
@@ -501,3 +501,17 @@ thinking behind them.
   the deadline. No more transactions are planned. `trading-bot` still active.
 - Note: the status page now shows a "Halted" banner that suggests
   `bot.js reset`. Don't: reset plus a timer restart would let it trade again.
+
+### 2026-11-25: Level 2, day 10 (01:00), locked-in check
+- Score unchanged at **0.053494 ETH (+3.66%)**, ~$89.75 at ~$1,676. Nonce
+  still 34, so no transactions since the lock-in. Bot timer disabled,
+  `halted` set, no runs since 11-23. `wallet-game-dash` and `trading-bot`
+  active. No dashboard comments, no new money. X not checked.
+- After the lock-in the game master asked how to keep stacking ETH. I
+  recommended: lend the WETH on Aave (1.34% APY on-chain, 1:1 with WETH, so
+  the score stays locked; ~+0.00004 ETH by the deadline), no grid restart
+  this level (the cushion over the goal is only 0.000339 ETH), rerun the
+  grid as Level 3, and optionally build log #5. No answer yet, so nothing
+  was done. No money moved.
+- `git pull` failed with `Permission denied (publickey)` at 01:00; the keys
+  are in the Bitwarden SSH agent, which probably needs unlocking.
