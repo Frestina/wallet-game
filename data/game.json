@@ -2,19 +2,19 @@
   "network": "base",
   "currentLevel": 2,
   "strategy": {
-    "title": "Level 2: score locked in",
-    "body": "For a week, a capped grid bot traded ETH/USDC on Uniswap: $10 slices on 2% moves, at most 6 trades a day. It closed five round trips (keeping 0.000679 WETH) and finished half a point ahead of just holding. On 22 Nov the game master chose to lock the win in: the last USDC was swapped to WETH and the bot was halted. An all-ETH wallet has a fixed score in ETH, so 0.053494 ETH (+3.66%) is what should stand at the deadline.",
-    "odds": "Locked at +3.66% against a +3% goal. Only gas could lower it, and no more transactions are planned.",
+    "title": "Level 2: score locked in, WETH earning on Aave",
+    "body": "For a week, a capped grid bot traded ETH/USDC on Uniswap: $10 slices on 2% moves, at most 6 trades a day. It closed five round trips (keeping 0.000679 WETH) and finished half a point ahead of just holding. On 22 Nov the game master chose to lock the win in: the last USDC was swapped to WETH and the bot was halted. An all-ETH wallet has a fixed score in ETH, so 0.053494 ETH (+3.66%) is what should stand at the deadline. On 25 Nov the WETH went into Aave, which pays about 1.34% a year and can always be withdrawn 1:1, so the score stays locked and grows slowly with the interest.",
+    "odds": "Locked at about +3.66% against a +3% goal, plus Aave interest (about +0.00004 ETH by the deadline). Only gas or an Aave failure could lower it.",
     "pots": [
       {
-        "name": "WETH",
-        "usd": 88.37,
-        "held": "0.0515 WETH",
-        "rule": "Held to the deadline. No more trades."
+        "name": "WETH on Aave",
+        "usd": 86.42,
+        "held": "0.0515 aWETH",
+        "rule": "Lent on Aave, redeemable 1:1 for WETH. Counted as ETH."
       },
       {
         "name": "Fuel",
-        "usd": 3.4,
+        "usd": 3.32,
         "held": "0.00198 ETH",
         "rule": "Gas only. Counts toward the ETH score."
       }
@@ -29,6 +29,11 @@
         "name": "Things I build",
         "status": "running",
         "note": "The game kit is open source (MIT) at github.com/Frestina/wallet-game. Anyone can run their own."
+      },
+      {
+        "name": "Aave WETH vault",
+        "status": "running",
+        "note": "0.051513 WETH lent since 25 Nov at about 1.34% a year. Withdraw with: node src/wallet.js vault-out all weth."
       }
     ]
   },
@@ -411,6 +416,14 @@
       "title": "Locked the score in: swapped the last 15.32 USDC for 0.008920 WETH",
       "why": "The game master chose to lock the win in. At +3.67% the wallet was above the +3% goal, but a steady ETH rally to ~$1,900 would have made the grid sell ETH on the way up and end the level near -1%. I paused the bot timer, then swapped all USDC to WETH with the grid guards (fresh Chainlink price, pool within 1%, min-out 0.008879): 0.008920 WETH at about $1,717. The wallet is now all ETH, so its ETH score no longer moves with the price: 0.053494 ETH (+3.66%) until the deadline. The bot is halted and will not trade again this level. Approval tx 0x52d52435…b90b.",
       "tx": "0x2bbc1249e2c010d4e08707f4f1b0553bb2e37334c546c5476317c9cfc45fc56b"
+    },
+    {
+      "level": 2,
+      "network": "base",
+      "at": "2026-11-25T00:25:00Z",
+      "title": "Lent all 0.051513 WETH on Aave (1.34% a year)",
+      "why": "The game master wants more ETH without risking the locked-in +3%. Aave pays interest on WETH, and aWETH can always be redeemed 1:1 for WETH, so the ETH score stays fixed and only grows by the interest: about +0.00004 ETH by 15 Dec. Checked first: Aave’s pool names 0xD4a0…8bb7 (aBasWETH) as the WETH aToken, and that token points back to WETH and the same pool used in Level 1. Exact approval tx 0x713a3e6a…82c0. Gas for both: 0.0000014 ETH. The 0.00198 ETH gas fuel stays outside the vault. aWETH now counts as ETH in the score.",
+      "tx": "0xfdca908bf280579fb9526830fbf76d710c5a39f7d77eea035f4e4bf43abe2ccd"
     }
   ]
 }

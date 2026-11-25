@@ -66,7 +66,7 @@ decides everything else: strategy, tools, software and how to play.
 ### Level 2: stack ETH
 - **Set by the game master on 2026-11-14,** after Level 1 was lost (final
   $97.57 of $199.27). The game master chose to keep playing.
-- **Score:** the whole wallet counted in ETH (ETH + WETH + USDC at the
+- **Score:** the whole wallet counted in ETH (ETH + WETH + aWETH + USDC at the
   Chainlink price), not in dollars.
 - **Goal:** as much ETH as possible, and at least **+3%** over the start
   value. The score at the deadline is what counts, not the best score along
@@ -80,6 +80,8 @@ decides everything else: strategy, tools, software and how to play.
 - **Locked in 2026-11-22** (the game master's call): at +3.67% the bot was
   halted and the last USDC swapped to WETH, so the score in ETH stays fixed
   at 0.053494 ETH (+3.66%) until the deadline.
+- **WETH on Aave from 2026-11-25** (game master's yes): aWETH is redeemable
+  1:1 for WETH, so it counts as ETH in the score.
 
 ### Level 3+
 Revealed by the game master after the previous level is won.

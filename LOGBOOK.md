@@ -14,7 +14,7 @@ thinking behind them.
 - **Accounts:** X @frestina87 (posting via Chromium; the Claude in Chrome browser named "Browser 1" is Chromium, checked via userAgentData), Hacker News `Frestina` (made 2026-10-08, for one Show HN), GitHub Frestina.
 - **Repo:** https://github.com/Frestina/wallet-game (public, MIT). Push session updates automatically after `node src/check-staged.js` passes.
 - **Reminder:** `node src/remind.js` sets the next /play notification (now 2026-11-28 12:00).
-- **Next:** 2026-11-28 12:00: light check (balance 0.051513 WETH + 0.001981 ETH, 0 USDC; nonce 34; bot timer disabled and halted; comments, new money). **Waiting on the game master:** yes/no on lending the WETH on Aave (1.34% APY, ~+0.00004 ETH by the deadline; needs aWETH counted in snapshot and dashboard) and on drafting build log #5. Then every 3 days until the 2026-12-15 12:08 Oslo deadline: read the score at the deadline block and close Level 2. Proposed for Level 3: rerun the grid without a lock-in deadline. Locked score 0.053494 ETH (+3.66%; goal 0.053155). X replies not checked since 11-02.
+- **Next:** 2026-11-28 12:00: light check (0.051513+ aWETH growing, 0.00198 ETH fuel, 0 WETH/USDC; nonce 36; bot timer disabled and halted; Aave WETH rate; comments, new money). Build log #5 not asked for; offer it again only if the game master brings it up. Then every 3 days until the 2026-12-15 12:08 Oslo deadline: read the score at the deadline block (aWETH counts) and close Level 2. Proposed for Level 3: staked ETH as the base plus a small grid without a lock-in deadline. Score 2026-11-25: 0.053493 ETH (+3.66%; goal 0.053155). X replies not checked since 11-02.
 ## How to update the dashboard
 
 1. Edit `data/game.json` (moves, checklist, strategy, level status).
@@ -515,3 +515,19 @@ thinking behind them.
   was done. No money moved.
 - `git pull` failed with `Permission denied (publickey)` at 01:00; the keys
   are in the Bitwarden SSH agent, which probably needs unlocking.
+- 00:25: the game master asked for more ideas to stack ETH. My answer: I
+  can't predict ETH, and in a random walk a grid's expected gain is about
+  zero minus fees (last week's gain came from chop plus the fall). Reliable
+  ETH comes from lending or staking yield, small but positive; big gains need
+  outside money. Game master said yes to Aave.
+- Checked aWETH on-chain: `Pool.getReserveData(WETH).aTokenAddress` =
+  0xD4a0…8bb7 (`aBasWETH`, 18 decimals), its `UNDERLYING_ASSET_ADDRESS()` is
+  WETH and its `POOL()` is the Level 1 pool. Added `vault-in/out <amount|all>
+  [usdc|weth]` to `wallet.js`, and aWETH to the score in `snapshot.js`, the
+  dashboard's live read (tested in Node) and `bot-dash.js` (restarted).
+- **Lent all 0.051513 WETH on Aave** from the bot machine: exact approval
+  0x713a…82c0, supply 0xfdca…2ccd. Gas 0.0000014 ETH. Score 0.053493 ETH
+  (+3.66%), now growing ~0.0000019 ETH a day. Withdraw with
+  `node src/wallet.js vault-out all weth --network base`. Risk: an Aave
+  failure, or WETH utilisation so high that withdrawal has to wait; both are
+  unlikely, and aWETH still counts while it waits.
